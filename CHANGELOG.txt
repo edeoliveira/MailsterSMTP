@@ -1,0 +1,70 @@
+#####
+Version 1.0.0-M2 (2009-02-10) - Codename A new dawn
+
+- Added ASF license file.
+- Added javadoc.
+- Refactored SMTPServer class to use a configuration object 
+  making internals less tied and much cleaner.
+- Javadoced each configuration option to make clear when their 
+  value is read.
+- The charset and the data deferred size new values will now be 
+  reread at each server startup.
+- Removed the getHelp(..) method from the Command interface.
+- Command objects now have a direct reference to their
+  CommandHandler.
+- Reworked starp/stop methods and added a shutdown method to the 
+  SMTPServer class thus allowing to restart multiple times the same 
+  instance until shutdown is called.
+- Removed the acceptor thread pool which is not used since the 
+  migration to MINA 2.
+- New empty constructor in SMTPServer class for ease of use.
+- Added mail trace in the default implementation of the 
+  DeliveryHandler.
+- Improved by 10% large data transfers by preventing unnecessary
+  IoBuffer copies due to auto expanding.
+- Improved DefaultDeliveryHandler against concurrent modifications
+  of it's deliveries list.
+- Fixed internal state after the end of a data transfer. This is no
+  more the DeliveryHandler job to reset it's state at the end of the
+  data(...) method because it's resetMessageState() method will be 
+  called.
+- Extracted Delivery and SharedStreamUtils classes from the
+  AbstractDeliveryHandler class to further prevent custom implementations
+  from duplicating existing code.
+- Added NPE check to the authentication API to prevent a custom factory
+  from returning a null instance.
+   
+#####
+Version 1.0.0-M1 (2009-01-19) - Codename The 5th of November
+
+- Migrated to MINA 2.0.0-M4 (was previously using a 1.1.x version)
+- Big code refactoring to make code easy to understand.
+- Added junit tests for the new funtionnalities.
+- Removed some unnecessary classes and interfaces that
+  only add complexity to the code.
+- API cleaning by renaming classes to reflect their real use.
+- The MessageListener list can now be modified on the fly and
+  changes are immediately available to new connections.
+- The new MessageDelivery API allows to control how
+  mail messages are delivered without having to 'reinvent the wheel' 
+  each time building on the available and tested code from the 
+  AbstractDeliveryHandler class.
+- Fixed HelpCommand class : prettified help messages, handled
+  DATA_END correctly.
+- Removed some unnecessary resets of the session state.
+- Resolved a potential concurrency problem in WiserMessage.getData()
+  method and marked it as deprecated as it is a very bad design idea.
+- Added a SessionContext to the MessageListener API :
+  it provides the ability to store some private attributes between 
+  the execution of the accept and deliver methods while also providing
+  the remote ip and the credential as parameters for these methods.
+- Fixed EHLO announce of supported AUTH mechanisms.
+- Fixed error code returned when a TooMuchDataException occurs.
+- Removed the fake VRFY command which is not part of the default required
+  command set of a SMTP implementation.
+- Added some adapter classes to reduce code writing on simple applications.
+- Fixed AuthenticationHandler and LoginValidator interface which raised an 
+  incorrect exception.
+- Fixed a rare threading issue allowing a re authentication immediately
+  after a successfull authentication.
+- Fixed bad commands handling and error codes messages.
