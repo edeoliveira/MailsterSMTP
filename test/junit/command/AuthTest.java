@@ -36,28 +36,18 @@ public class AuthTest extends ServerTestCase
 		super(name);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mailster.smtp.examples.ServerTestCase#setUp()
-	 */
 	protected void setUp() throws Exception
 	{
 		this.wiser = new TestWiser();
 		this.wiser.setHostname("localhost");
 		this.wiser.setPort(PORT);
-		wiser.getServer().setAuthenticationHandlerFactory(
+		this.wiser.getServer().setAuthenticationHandlerFactory(
 				new AllSchemesAuthenticationHandler(validator));
 		
 		this.wiser.start();
 		this.c = new Client("localhost", PORT);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.mailster.smtp.examples.ServerTestCase#tearDown()
-	 */
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();
@@ -74,7 +64,6 @@ public class AuthTest extends ServerTestCase
 	 * <li>User issues another AUTH command</li>
 	 * <li>We expect an error message</li>
 	 * </ol>
-	 * {@link org.mailster.smtp.command.impl.AuthCommand#execute(java.lang.String, org.subethamail.smtp.server.ConnectionContext)}.
 	 */
 	public void testAuthPlain() throws Exception
 	{
@@ -112,7 +101,6 @@ public class AuthTest extends ServerTestCase
 	 * <li>User issues another AUTH command</li>
 	 * <li>We expect an error message</li>
 	 * </ol>
-	 * {@link org.mailster.smtp.command.impl.AuthCommand#execute(java.lang.String, org.subethamail.smtp.server.ConnectionContext)}.
 	 */
 	public void testAuthLogin() throws Exception
 	{

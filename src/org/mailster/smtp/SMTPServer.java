@@ -183,7 +183,7 @@ public class SMTPServer
 				public Thread newThread(Runnable r) 
 				{					
 					sequence += 1;
-					return new Thread(r, "SubEthaSMTP Thread "+sequence);
+					return new Thread(r, "MailsterSMTP Thread "+sequence);
 				}			
 			});
 			

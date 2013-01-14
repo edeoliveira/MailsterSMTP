@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="lib/ristretto-1.0-all.jar"/>
 	<classpathentry kind="lib" path="lib/mina-core-2.0.0-M4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MinaTrunk"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

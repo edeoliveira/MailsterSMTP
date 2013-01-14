@@ -1,6 +1,7 @@
 package org.mailster.smtp.auth.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -23,20 +24,20 @@ public class PlainAuthenticationHandler implements AuthenticationHandler
 {
 	private LoginValidator helper;
 
-	private static List<String> AUTH_MECH;
+	private List<String> authentificationMechanisms;
 
 	/** Creates a new instance of PlainAuthenticationHandler */
 	public PlainAuthenticationHandler(LoginValidator helper)
 	{
 		this.helper = helper;
 
-		AUTH_MECH = new ArrayList<String>(1);
-		AUTH_MECH.add("PLAIN");
+		authentificationMechanisms = new ArrayList<String>(1);
+		authentificationMechanisms.add("PLAIN");
 	}
 
 	public List<String> getAuthenticationMechanisms()
 	{
-		return AUTH_MECH;
+		return Collections.unmodifiableList(authentificationMechanisms);
 	}
 
 	public boolean auth(String clientInput, StringBuilder response, SMTPContext ctx)

@@ -38,7 +38,7 @@ public class SMTPCodecDecoder implements ProtocolDecoder
 {
     private final static String CONTEXT = SMTPCodecDecoder.class.getName()+ ".context";
 
-	protected final static String TMPFILE_PREFIX = "subetha";
+	protected final static String TMPFILE_PREFIX = "mailsterSmtp";
 	protected final static String TMPFILE_SUFFIX = ".eml";
 
     private final static byte[] SMTP_CMD_DELIMITER = new byte[] {'\r','\n'};
