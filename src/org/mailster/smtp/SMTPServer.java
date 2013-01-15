@@ -66,12 +66,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SMTPServer
 {
-	private static Logger log = LoggerFactory.getLogger(SMTPServer.class);
-
-	/**
-	 * IoService JMX name.
-	 */
-	//private static final String IO_SERVICE_MBEAN_NAME = "subethasmtp.mina.server:type=IoServiceMBean";
+	private static final Logger LOG = LoggerFactory.getLogger(SMTPServer.class);
 
 	/**
 	 * default to all interfaces
@@ -123,40 +118,6 @@ public class SMTPServer
 		this.commandHandler = new CommandHandler();
 		initService();		
 	}
-	
-	/**
-	 * Start the JMX service.
-	 * @throws NullPointerException 
-	 * @throws MalformedObjectNameException 
-	 * @throws NotCompliantMBeanException 
-	 * @throws MBeanRegistrationException 
-	 * @throws InstanceAlreadyExistsException 
-	 */
-	/*public void startJMXService(IoService svc) 
-		throws InstanceAlreadyExistsException, MBeanRegistrationException, 
-				NotCompliantMBeanException, MalformedObjectNameException, NullPointerException
-	{
-		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-		mbs.registerMBean(new IoServiceMBean(svc), new ObjectName(IO_SERVICE_MBEAN_NAME));
-	}*/
-
-	/**
-	 * Stop the JMX service.
-	 * @throws NullPointerException 
-	 * @throws MalformedObjectNameException 
-	 * @throws MBeanRegistrationException 
-	 * @throws InstanceNotFoundException 
-	 * 
-	 * @throws InstanceNotFoundException
-	 * @throws MBeanRegistrationException
-	 */
-	/*public void stopJMXService() 
-		throws InstanceNotFoundException, MBeanRegistrationException, 
-				MalformedObjectNameException, NullPointerException
-	{
-		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-		mbs.unregisterMBean(new ObjectName(IO_SERVICE_MBEAN_NAME));
-	}*/
 
 	/**
 	 * Initializes the runtime service.
@@ -171,7 +132,7 @@ public class SMTPServer
 			acceptor.getSessionConfig().setReuseAddress(true);
 			DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
 
-			if (log.isTraceEnabled())
+			if (LOG.isTraceEnabled())
 				chain.addLast("logger", new LoggingFilter());
 
 			codecFactory = new SMTPCodecFactory(config);
@@ -206,7 +167,7 @@ public class SMTPServer
 	{
 		if (running)
 		{
-			log.info("SMTP server is already started.");
+			LOG.info("SMTP server is already started.");
 			return;
 		}
 		
@@ -235,7 +196,7 @@ public class SMTPServer
 		{
 			acceptor.bind(isa);
 			running = true;
-			log.info("SMTP server started ...");
+			LOG.info("SMTP server started ...");
 		}
 		catch (Exception e)
 		{
@@ -255,7 +216,7 @@ public class SMTPServer
 				acceptor.unbind(); 
 			} catch (Exception e) { e.printStackTrace(); }
 			
-			log.info("SMTP server stopped.");
+			LOG.info("SMTP server stopped.");
 		}
 		finally
 		{
@@ -276,7 +237,7 @@ public class SMTPServer
 	{
 		try
 		{
-			log.info("SMTP server shutting down...");
+			LOG.info("SMTP server shutting down...");
 			if (isRunning())
 				stop();			
 			
@@ -285,7 +246,7 @@ public class SMTPServer
 			} catch (Exception e) { e.printStackTrace(); }
 			
 			shutdowned = true;
-			log.info("SMTP server shutdown complete.");
+			LOG.info("SMTP server shutdown complete.");
 		}
 		finally
 		{
