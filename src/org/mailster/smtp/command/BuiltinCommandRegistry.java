@@ -51,6 +51,6 @@ public enum BuiltinCommandRegistry
 	public Command getNewInstance() 
 		throws InstantiationException, IllegalAccessException
 	{
-		return (Command) this.commandClass.newInstance();
+		return this.commandClass.newInstance();
 	}
 }

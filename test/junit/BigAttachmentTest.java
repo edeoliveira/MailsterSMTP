@@ -73,7 +73,7 @@ public class BigAttachmentTest extends TestCase
 		} catch (Exception e)
 		{
 			e.printStackTrace();
-		};
+		}
 	}
 	
 	public void testAttachments() throws Exception
@@ -145,9 +145,6 @@ public class BigAttachmentTest extends TestCase
 		BufferedInputStream ind = new BufferedInputStream(new FileInputStream(dest));
 		MessageDigest md1 = MessageDigest.getInstance("MD5");
 		MessageDigest md2 = MessageDigest.getInstance("MD5");
-		
-		if (ins == null || ind == null)
-			return false;
 		
 		int r = 0;
 		byte[] buf1 = new byte[BUFFER_SIZE];

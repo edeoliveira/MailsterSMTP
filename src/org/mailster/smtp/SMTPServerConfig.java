@@ -135,7 +135,7 @@ public class SMTPServerConfig
 	 * Set the maximum size in bytes of a single message before it is 
 	 * dumped to a temporary file. Argument must be a positive power 
 	 * of two in order to follow the expanding algorithm of 
-	 * {@link org.apache.mina.common.ByteBuffer} to prevent unnecessary
+	 * {@link org.apache.mina.core.buffer.IoBuffer} to prevent unnecessary
 	 * memory consumption.
 	 */	
 	public void setDataDeferredSize(int dataDeferredSize) 
@@ -200,14 +200,6 @@ public class SMTPServerConfig
 	public void setMaxRecipients(int maxRecipients)
 	{
 		this.maxRecipients = maxRecipients;
-	}
-	
-	/**
-	 * The name of the server software.
-	 */
-	public String getName()
-	{
-		return NAME;
 	}
 
 	/**

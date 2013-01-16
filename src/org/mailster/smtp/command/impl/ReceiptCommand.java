@@ -43,12 +43,7 @@ public class ReceiptCommand extends AbstractBaseCommand
 		}
 
 		String args = getArgPredicate(commandString);
-		if (!args.toUpperCase().startsWith("TO:"))
-		{
-			sendResponse(ioSession, "501 Syntax: RCPT TO: <address> Error in parameters: \"" + args + "\"");
-			return;
-		}
-		else
+		if (args.toUpperCase().startsWith("TO:"))
 		{
 			String recipientAddress = extractEmailAddress(args, 3);
 			try
@@ -62,5 +57,9 @@ public class ReceiptCommand extends AbstractBaseCommand
 				sendResponse(ioSession, ex.getMessage());
 			}
 		}
+        else
+        {
+            sendResponse(ioSession, "501 Syntax: RCPT TO: <address> Error in parameters: \"" + args + "\"");
+        }
 	}
 }

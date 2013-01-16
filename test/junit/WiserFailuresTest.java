@@ -67,10 +67,10 @@ public class WiserFailuresTest extends TestCase
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();
-		try { input.close(); } catch (Exception e){};
-		try { output.close(); } catch (Exception e){};
-		try { socket.close(); } catch (Exception e){};
-		try { server.stop(); } catch (Exception e){};
+		try { input.close(); } catch (Exception e){}
+		try { output.close(); } catch (Exception e){}
+		try { socket.close(); } catch (Exception e){}
+		try { server.stop(); } catch (Exception e){}
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class WiserFailuresTest extends TestCase
 
 		assertEquals(1, server.getMessages().size());
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
-		WiserMessage email = (WiserMessage)emailIter.next();
+		WiserMessage email = emailIter.next();
 		assertEquals("Body", email.getMimeMessage().getContent().toString());
 	}
 
@@ -118,7 +118,7 @@ public class WiserFailuresTest extends TestCase
 
 		assertEquals(1, server.getMessages().size());
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
-		WiserMessage email = (WiserMessage)emailIter.next();
+		WiserMessage email = emailIter.next();
 		assertEquals("Body", email.getMimeMessage().getContent().toString());
 	}
 
@@ -140,7 +140,7 @@ public class WiserFailuresTest extends TestCase
 
 		assertEquals(1, server.getMessages().size());
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
-		WiserMessage email = (WiserMessage)emailIter.next();
+		WiserMessage email = emailIter.next();
 		assertEquals(body, email.getMimeMessage().getContent().toString());
 	}
 	  
@@ -159,7 +159,7 @@ public class WiserFailuresTest extends TestCase
 
 		assertEquals(1, server.getMessages().size());
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
-		WiserMessage email = (WiserMessage)emailIter.next();
+		WiserMessage email = emailIter.next();
 		assertEquals(email.getMimeMessage().getContent().toString(), bodyWithCR);
 	}
 
@@ -238,11 +238,9 @@ public class WiserFailuresTest extends TestCase
 			Transport transport = session.getTransport("smtp");
 			transport.connect("localhost", SMTP_PORT, null, null);
 
-			for (int i = 0; i < mimeMessages.length; i++)
-			{
-				MimeMessage mimeMessage = mimeMessages[i];
-				transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-			}
+            for (MimeMessage mimeMessage : mimeMessages) {
+                transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+            }
 
 			transport.close();
 		}
@@ -306,7 +304,7 @@ public class WiserFailuresTest extends TestCase
 		}
 
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
-		WiserMessage email = (WiserMessage)emailIter.next();
+		WiserMessage email = emailIter.next();
 		MimeMessage mime = email.getMimeMessage();
 		assertTrue(mime.getHeader("Subject")[0].equals("Test"));
 		assertTrue(mime.getContent().toString().equals("Test Body"));
@@ -438,7 +436,7 @@ public class WiserFailuresTest extends TestCase
 
 	private String readInput()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		try
 		{
 			do

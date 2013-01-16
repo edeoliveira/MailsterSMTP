@@ -89,13 +89,11 @@ public class HelpMessage
 		if (commandName != null ? !commandName.equals(that.commandName)
 				: that.commandName != null)
 			return false;
-		
-		if (helpMessage != null ? !helpMessage.equals(that.helpMessage)
-				: that.helpMessage != null)
-			return false;
-		
-		return true;
-	}
+
+        return !(helpMessage != null ? !helpMessage.equals(that.helpMessage)
+                : that.helpMessage != null);
+
+    }
 
 	public int hashCode()
 	{

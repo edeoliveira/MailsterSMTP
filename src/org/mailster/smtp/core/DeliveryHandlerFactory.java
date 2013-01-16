@@ -64,8 +64,7 @@ public class DeliveryHandlerFactory
 	}
 	
 	/**
-	 * Sets the {@link AbstractDeliveryHandler} implementation to use when creating the
-	 * {@link DeliveryHandlerInterface}.
+	 * Sets the {@link AbstractDeliveryHandler} implementation to use.
 	 */
 	public void setDeliveryHandlerImplClass(Class<? extends AbstractDeliveryHandler> c) 
 	{

@@ -86,7 +86,7 @@ public class PlainAuthenticationHandler implements AuthenticationHandler
 				decodedSecret.length - usernameStop - 1);
 		try
 		{
-			helper.login(username.toString(), password);
+			helper.login(username, password);
 			resetState();
 		}
 		catch (LoginFailedException lfe)

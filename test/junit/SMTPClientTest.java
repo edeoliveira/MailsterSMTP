@@ -199,10 +199,8 @@ public class SMTPClientTest extends TestCase
             
         } catch (IOException e1) {
             System.err.println(e1.getLocalizedMessage());
-            return;
         } catch (SMTPException e1) {
             System.err.println(e1.getMessage());
-            return;            
         }
 	}
 	

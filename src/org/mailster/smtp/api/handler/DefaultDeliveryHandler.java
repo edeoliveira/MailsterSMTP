@@ -95,7 +95,7 @@ public class DefaultDeliveryHandler
 			try
 			{
 				CharsetDecoder decoder = charset.newDecoder();
-				int len = 0;
+				int len;
 				while ((len=in.read(buf)) >= 0)
 				{
 					log.trace(decoder.decode(

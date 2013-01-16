@@ -22,7 +22,7 @@ public class SMTPSessionHandler extends IoHandlerAdapter
     public void sessionOpened( IoSession session )
     {
         session.write("EHLO " + hostName);
-        session.setAttribute("step", new Integer(0));
+        session.setAttribute("step", 0);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SMTPSessionHandler extends IoHandlerAdapter
     @Override
     public void messageReceived( IoSession session, Object message )
     {
-        int step = ((Integer) session.getAttribute("step")).intValue();
+        int step = (Integer) session.getAttribute("step");
         
         switch (step) 
         {
@@ -65,7 +65,7 @@ public class SMTPSessionHandler extends IoHandlerAdapter
         }
         
         step++;
-        session.setAttribute("step", new Integer(step));
+        session.setAttribute("step", step);
     }
 
     @Override

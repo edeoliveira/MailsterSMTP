@@ -85,7 +85,7 @@ public class CommandHandler
 	/**
 	 * Calls the execute method on a command.
 	 * 
-	 * @param context
+	 * @param ctx
 	 * @param commandString
 	 * @throws SocketTimeoutException
 	 * @throws IOException
@@ -107,7 +107,7 @@ public class CommandHandler
 	/**
 	 * Executes an auth command.
 	 * 
-	 * @param context
+	 * @param ctx
 	 * @param commandString
 	 * @throws SocketTimeoutException
 	 * @throws IOException
