@@ -4,7 +4,7 @@ import org.mailster.smtp.command.impl.AuthCommand;
 import org.mailster.smtp.command.impl.DataCommand;
 import org.mailster.smtp.command.impl.DataEndCommand;
 import org.mailster.smtp.command.impl.EhloCommand;
-import org.mailster.smtp.command.impl.HelloCommand;
+import org.mailster.smtp.command.impl.HeloCommand;
 import org.mailster.smtp.command.impl.HelpCommand;
 import org.mailster.smtp.command.impl.MailCommand;
 import org.mailster.smtp.command.impl.NoopCommand;
@@ -24,7 +24,7 @@ public enum BuiltinCommandRegistry
 	AUTH(AuthCommand.class), 
 	DATA(DataCommand.class),
 	EHLO(EhloCommand.class), 
-	HELO(HelloCommand.class), 
+	HELO(HeloCommand.class), 
 	HELP(HelpCommand.class), 
 	MAIL(MailCommand.class), 
 	NOOP(NoopCommand.class), 

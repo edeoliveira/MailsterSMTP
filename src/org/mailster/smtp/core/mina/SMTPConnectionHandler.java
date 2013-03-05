@@ -18,7 +18,7 @@ import org.mailster.smtp.command.CommandHandler;
 import org.mailster.smtp.command.exceptions.CommandException;
 import org.mailster.smtp.command.impl.AuthCommand;
 import org.mailster.smtp.command.impl.EhloCommand;
-import org.mailster.smtp.command.impl.HelloCommand;
+import org.mailster.smtp.command.impl.HeloCommand;
 import org.mailster.smtp.command.impl.NoopCommand;
 import org.mailster.smtp.command.impl.QuitCommand;
 import org.mailster.smtp.command.impl.ResetCommand;
@@ -243,7 +243,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
             	// Per RFC 2554
             	Command cmd = this.commandHandler.getCommandFromString(line);
             	
-            	if (cmd != null && (cmd instanceof AuthCommand || cmd instanceof EhloCommand || cmd instanceof HelloCommand ||
+            	if (cmd != null && (cmd instanceof AuthCommand || cmd instanceof EhloCommand || cmd instanceof HeloCommand ||
             			   cmd instanceof NoopCommand || cmd instanceof ResetCommand || cmd instanceof QuitCommand))
             		this.commandHandler.handleCommand(line, session, minaCtx);
             	else

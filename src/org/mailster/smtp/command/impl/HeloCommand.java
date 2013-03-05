@@ -13,9 +13,9 @@ import org.mailster.smtp.core.mina.SMTPContext;
  * @author Ian McFarland &lt;ian@neo.com&gt;
  * @author Jon Stevens
  */
-public class HelloCommand extends AbstractBaseCommand
+public class HeloCommand extends AbstractBaseCommand
 {
-	public HelloCommand()
+	public HeloCommand()
 	{
 		super("HELO", 
 			  "The HELO command posts the client hostname info to the server.", 
