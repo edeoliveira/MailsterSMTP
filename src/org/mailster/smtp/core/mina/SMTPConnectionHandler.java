@@ -116,7 +116,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 				sendResponse(session, "554 Transaction failed. Too many connections.");
 			}
 			else
-				sendResponse(session, "220 " + config.getHostName() + " ESMTP " + config.NAME);
+				sendResponse(session, "220 " + config.getHostName() + " ESMTP " + SMTPServerConfig.NAME);
 		}
 		catch (IOException e1)
 		{
