@@ -38,6 +38,7 @@ public class AuthTest extends ServerTestCase
 
 	protected void setUp() throws Exception
 	{
+		super.setUp();
 		this.wiser = new TestWiser();
 		this.wiser.setHostname("localhost");
 		this.wiser.setPort(PORT);

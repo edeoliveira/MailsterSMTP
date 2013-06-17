@@ -52,6 +52,7 @@ public class SMTPClientTest extends TestCase
 	/** */
 	protected Wiser wiser;
 	protected Session session;
+	private Random rnd;
 	
 	/** */
 	public SMTPClientTest(String name) { super(name); }
@@ -70,6 +71,7 @@ public class SMTPClientTest extends TestCase
 		this.wiser.setPort(PORT);
 		
 		this.wiser.start();
+		rnd = new Random();
 	}
 	
 	/** */
@@ -227,7 +229,7 @@ public class SMTPClientTest extends TestCase
 	public void testBinaryEightBitMessage() throws Exception
 	{
 		byte[] body = new byte[64];
-		new Random().nextBytes(body);
+		rnd.nextBytes(body);
 		
 		MimeMessage message = new MimeMessage(this.session);
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress("anyone@anywhere.com"));

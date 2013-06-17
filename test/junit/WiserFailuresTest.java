@@ -67,10 +67,10 @@ public class WiserFailuresTest extends TestCase
 	protected void tearDown() throws Exception
 	{
 		super.tearDown();
-		try { input.close(); } catch (Exception e){}
-		try { output.close(); } catch (Exception e){}
-		try { socket.close(); } catch (Exception e){}
-		try { server.stop(); } catch (Exception e){}
+		try { input.close(); } catch (Exception e){ e.printStackTrace(); }
+		try { output.close(); } catch (Exception e){ e.printStackTrace(); }
+		try { socket.close(); } catch (Exception e){ e.printStackTrace(); }
+		try { server.stop(); } catch (Exception e){ e.printStackTrace(); }
 	}
 
 	/**
