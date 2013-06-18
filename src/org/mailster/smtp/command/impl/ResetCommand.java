@@ -20,6 +20,12 @@ public class ResetCommand extends AbstractBaseCommand
 		super("RSET", "The RSET command resets the state of the mail session");
 	}
 
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

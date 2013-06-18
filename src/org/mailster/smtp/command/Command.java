@@ -16,4 +16,6 @@ public interface Command
 		throws IOException;	
 	
 	public String getName();
+	
+	public boolean isAuthRequired();
 }

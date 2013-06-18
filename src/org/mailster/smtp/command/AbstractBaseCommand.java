@@ -14,7 +14,6 @@ import javax.mail.internet.InternetAddress;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.command.exceptions.CommandException;
-import org.mailster.smtp.command.util.HelpMessage;
 import org.mailster.smtp.core.mina.SMTPConnectionHandler;
 
 /**
@@ -138,5 +137,11 @@ abstract public class AbstractBaseCommand implements Command
 			address = address.substring(1, address.indexOf('>'));
 		
 		return address;
+	}
+
+	@Override
+	public boolean isAuthRequired()
+	{
+		return true;
 	}
 }

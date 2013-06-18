@@ -30,6 +30,12 @@ public class AuthCommand extends AbstractBaseCommand
 				+ " initial-response = an optional base64-encoded response");
 	}
 
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

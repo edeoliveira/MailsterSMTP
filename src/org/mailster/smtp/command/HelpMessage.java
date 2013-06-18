@@ -1,4 +1,4 @@
-package org.mailster.smtp.command.util;
+package org.mailster.smtp.command;
 
 import java.util.StringTokenizer;
 

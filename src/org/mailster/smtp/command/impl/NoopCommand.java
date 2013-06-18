@@ -19,6 +19,12 @@ public class NoopCommand extends AbstractBaseCommand
 				"current session alive pinging it to prevent a timeout");
 	}
 
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

@@ -26,7 +26,13 @@ public class EhloCommand extends AbstractBaseCommand
 					  "the extended commands available on the local server"
 				, "<hostname>\n hostname = your hostname");
 	}
-	
+
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

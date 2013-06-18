@@ -22,6 +22,12 @@ public class HeloCommand extends AbstractBaseCommand
 			  "<hostname>\n hostname = your hostname");
 	}
 
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

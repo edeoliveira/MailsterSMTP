@@ -20,6 +20,12 @@ public class QuitCommand extends AbstractBaseCommand
 		super("QUIT", "The QUIT command closes the SMTP session");
 	}
 
+	@Override
+	public boolean isAuthRequired()
+	{
+		return false;
+	}
+
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{

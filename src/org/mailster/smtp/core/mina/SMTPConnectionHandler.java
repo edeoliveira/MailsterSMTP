@@ -16,12 +16,6 @@ import org.mailster.smtp.api.TooMuchDataException;
 import org.mailster.smtp.command.Command;
 import org.mailster.smtp.command.CommandHandler;
 import org.mailster.smtp.command.exceptions.CommandException;
-import org.mailster.smtp.command.impl.AuthCommand;
-import org.mailster.smtp.command.impl.EhloCommand;
-import org.mailster.smtp.command.impl.HeloCommand;
-import org.mailster.smtp.command.impl.NoopCommand;
-import org.mailster.smtp.command.impl.QuitCommand;
-import org.mailster.smtp.command.impl.ResetCommand;
 import org.mailster.smtp.core.DeliveryHandlerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -243,11 +237,10 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
             	// Per RFC 2554
             	Command cmd = this.commandHandler.getCommandFromString(line);
             	
-            	if (cmd != null && (cmd instanceof AuthCommand || cmd instanceof EhloCommand || cmd instanceof HeloCommand ||
-            			   cmd instanceof NoopCommand || cmd instanceof ResetCommand || cmd instanceof QuitCommand))
-            		this.commandHandler.handleCommand(line, session, minaCtx);
-            	else
+            	if (cmd.isAuthRequired())
             		sendResponse(session, "530 Authentication required");
+            	else
+            		this.commandHandler.handleCommand(line, session, minaCtx);
             }
             else
             	this.commandHandler.handleCommand(line, session, minaCtx);
