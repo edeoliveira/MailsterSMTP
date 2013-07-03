@@ -77,7 +77,6 @@ public class CharTerminatedInputStream
         buffer = new int[terminator.length];
         for (int i = 0; i < terminator.length; i++) {
             match[i] = (int)terminator[i];
-            buffer[i] = (int)terminator[i];
         }
         this.in = in;
     }
