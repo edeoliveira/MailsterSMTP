@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.net.SocketAddress;
 
 import org.mailster.smtp.SMTPServerConfig;
-import org.mailster.smtp.auth.Credential;
+import org.mailster.smtp.core.auth.Credential;
 
 /**
  * Interface which provides context to the message handlers.

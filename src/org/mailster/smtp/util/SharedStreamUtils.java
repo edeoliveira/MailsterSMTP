@@ -4,9 +4,6 @@ import java.io.InputStream;
 
 import javax.mail.util.SharedByteArrayInputStream;
 
-import org.mailster.smtp.core.streams.CharTerminatedInputStream;
-import org.mailster.smtp.core.streams.DotUnstuffingInputStream;
-import org.mailster.smtp.core.streams.SharedTmpFileInputStream;
 
 /**
  * Shared streams utility methods.
@@ -32,8 +29,8 @@ public class SharedStreamUtils
 	 * is unstuffed and returned. Unstuffing is made by encapsulating the stream within
 	 * special streams.
 	 * 
-	 * @see org.mailster.smtp.core.streams.CharTerminatedInputStream
-	 * @see org.mailster.smtp.core.streams.DotUnstuffingInputStream
+	 * @see org.mailster.smtp.util.CharTerminatedInputStream
+	 * @see org.mailster.smtp.util.DotUnstuffingInputStream
 	 */
 	public static InputStream getPrivateInputStream(boolean useCopy, InputStream data)
 	{

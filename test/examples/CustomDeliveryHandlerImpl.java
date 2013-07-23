@@ -7,7 +7,7 @@ import org.mailster.smtp.api.RejectException;
 import org.mailster.smtp.api.TooMuchDataException;
 import org.mailster.smtp.api.handler.AbstractDeliveryHandler;
 import org.mailster.smtp.api.handler.DeliveryContext;
-import org.mailster.smtp.auth.AuthenticationHandler;
+import org.mailster.smtp.core.auth.AuthenticationHandler;
 
 /**
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;

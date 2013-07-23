@@ -3,9 +3,9 @@ package junit.command;
 import junit.util.Client;
 import junit.util.ServerTestCase;
 
-import org.mailster.smtp.auth.LoginFailedException;
-import org.mailster.smtp.auth.LoginValidator;
-import org.mailster.smtp.auth.impl.AllSchemesAuthenticationHandler;
+import org.mailster.smtp.core.auth.LoginFailedException;
+import org.mailster.smtp.core.auth.LoginValidator;
+import org.mailster.smtp.core.auth.impl.AllSchemesAuthenticationHandler;
 import org.mailster.smtp.util.Base64;
 
 /**

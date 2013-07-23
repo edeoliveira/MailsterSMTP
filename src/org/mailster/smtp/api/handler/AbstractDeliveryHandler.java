@@ -11,10 +11,10 @@ import org.mailster.smtp.api.RejectException;
 import org.mailster.smtp.api.SessionContext;
 import org.mailster.smtp.api.TooMuchDataException;
 import org.mailster.smtp.api.listener.MessageListener;
-import org.mailster.smtp.auth.AuthenticationHandler;
-import org.mailster.smtp.auth.Credential;
-import org.mailster.smtp.auth.LoginFailedException;
-import org.mailster.smtp.core.mina.SMTPContext;
+import org.mailster.smtp.core.SMTPContext;
+import org.mailster.smtp.core.auth.AuthenticationHandler;
+import org.mailster.smtp.core.auth.Credential;
+import org.mailster.smtp.core.auth.LoginFailedException;
 
 /**
  * A simple base class to make implementation of delivery handlers easier.

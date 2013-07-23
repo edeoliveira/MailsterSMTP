@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 import junit.framework.TestCase;
 
-import org.mailster.smtp.core.streams.SharedTmpFileInputStream;
+import org.mailster.smtp.util.SharedTmpFileInputStream;
 
 import wiser.WiserMessage;
 
