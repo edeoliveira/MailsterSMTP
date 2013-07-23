@@ -92,7 +92,6 @@ public class HelpMessage
 
         return !(helpMessage != null ? !helpMessage.equals(that.helpMessage)
                 : that.helpMessage != null);
-
     }
 
 	public int hashCode()

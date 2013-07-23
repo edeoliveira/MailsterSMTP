@@ -28,12 +28,12 @@ public class DataEndCommand extends AbstractCommand
 		try
 		{
 			ctx.getDeliveryHandler().data(ctx.getInputStream());
-			ResetCommand.resetContext(ctx);
+			resetContext(ctx);
 			sendResponse(ioSession, "250 Ok");
 		}
 		catch (RejectException ex)
 		{
-			ResetCommand.resetContext(ctx);
+			resetContext(ctx);
 			sendResponse(ioSession, ex.getMessage());
 		}
 	}

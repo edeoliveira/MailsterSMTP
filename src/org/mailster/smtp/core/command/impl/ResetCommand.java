@@ -32,10 +32,4 @@ public class ResetCommand extends AbstractCommand
 		resetContext(ctx);
 		sendResponse(ioSession, "250 Ok");
 	}
-	
-	public static void resetContext(SMTPContext ctx)
-	{
-		ctx.getSession().reset();
-		ctx.getDeliveryHandler().resetMessageState();
-	}
 }

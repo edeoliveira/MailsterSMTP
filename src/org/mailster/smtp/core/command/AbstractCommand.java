@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPConnectionHandler;
+import org.mailster.smtp.core.SMTPContext;
 
 /**
  * An abstract class which provides a minimal function set used
@@ -143,4 +144,10 @@ abstract public class AbstractCommand implements Command
 	{
 		return true;
 	}
+	
+	public static void resetContext(SMTPContext ctx)
+	{
+		ctx.getSession().reset();
+		ctx.getDeliveryHandler().resetMessageState();
+	}	
 }
