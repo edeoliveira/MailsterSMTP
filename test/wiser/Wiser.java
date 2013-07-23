@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.mailster.smtp.SMTPServer;
+import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.api.SessionContext;
 import org.mailster.smtp.api.TooMuchDataException;
-import org.mailster.smtp.api.listener.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

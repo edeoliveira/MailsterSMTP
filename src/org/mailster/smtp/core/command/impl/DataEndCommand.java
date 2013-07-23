@@ -3,8 +3,8 @@ package org.mailster.smtp.core.command.impl;
 import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
-import org.mailster.smtp.api.RejectException;
 import org.mailster.smtp.api.TooMuchDataException;
+import org.mailster.smtp.api.handler.RejectException;
 import org.mailster.smtp.core.SMTPContext;
 import org.mailster.smtp.core.command.AbstractCommand;
 

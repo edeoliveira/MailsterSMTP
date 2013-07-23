@@ -1,6 +1,6 @@
 package org.mailster.smtp.api.handler;
 
-import org.mailster.smtp.api.listener.MessageListener;
+import org.mailster.smtp.api.MessageListener;
 
 /**
  * Tracks which listeners need delivery.

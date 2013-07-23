@@ -1,9 +1,12 @@
-package org.mailster.smtp.core.auth.impl;
+package org.mailster.smtp;
 
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.core.auth.AuthenticationHandlerFactory;
 import org.mailster.smtp.core.auth.LoginValidator;
 import org.mailster.smtp.core.auth.PluginAuthenticationHandler;
+import org.mailster.smtp.core.auth.impl.DummyAuthenticationHandler;
+import org.mailster.smtp.core.auth.impl.LoginAuthenticationHandler;
+import org.mailster.smtp.core.auth.impl.PlainAuthenticationHandler;
 
 /**
  * Implements a {@link PluginAuthenticationHandler} handler which

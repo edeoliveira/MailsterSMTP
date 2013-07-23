@@ -1,4 +1,4 @@
-package org.mailster.smtp.api.handler;
+package org.mailster.smtp;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,9 +8,12 @@ import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mailster.smtp.api.RejectException;
+import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.api.TooMuchDataException;
-import org.mailster.smtp.api.listener.MessageListener;
+import org.mailster.smtp.api.handler.AbstractDeliveryHandler;
+import org.mailster.smtp.api.handler.Delivery;
+import org.mailster.smtp.api.handler.DeliveryContext;
+import org.mailster.smtp.api.handler.RejectException;
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.util.SharedStreamUtils;
 import org.slf4j.Logger;

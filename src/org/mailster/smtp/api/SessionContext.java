@@ -4,7 +4,6 @@ import java.net.SocketAddress;
 
 import org.mailster.smtp.api.handler.AbstractDeliveryHandler;
 import org.mailster.smtp.api.handler.DeliveryContext;
-import org.mailster.smtp.api.listener.MessageListener;
 import org.mailster.smtp.core.auth.Credential;
 
 /**

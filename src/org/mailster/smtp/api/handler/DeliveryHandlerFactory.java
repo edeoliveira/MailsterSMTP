@@ -4,7 +4,8 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.mailster.smtp.api.listener.MessageListener;
+import org.mailster.smtp.DefaultDeliveryHandler;
+import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.core.auth.AuthenticationHandlerFactory;
 import org.mailster.smtp.core.auth.impl.DummyAuthenticationHandler;
