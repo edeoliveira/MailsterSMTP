@@ -1,4 +1,4 @@
-package org.mailster.smtp.core.command.impl;
+package org.mailster.smtp.core.commands.impl;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import org.mailster.smtp.core.SMTPContext;
 import org.mailster.smtp.core.Session;
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.core.auth.impl.DummyAuthenticationHandler;
-import org.mailster.smtp.core.command.AbstractCommand;
+import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
  * The EHLO command implementation.

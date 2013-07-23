@@ -1,4 +1,4 @@
-package org.mailster.smtp.core.command;
+package org.mailster.smtp.core.commands;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPConnectionHandler;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.command.impl.AuthCommand;
+import org.mailster.smtp.core.commands.impl.AuthCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

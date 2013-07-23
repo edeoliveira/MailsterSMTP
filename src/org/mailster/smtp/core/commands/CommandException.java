@@ -1,4 +1,4 @@
-package org.mailster.smtp.core.command;
+package org.mailster.smtp.core.commands;
 
 
 /**

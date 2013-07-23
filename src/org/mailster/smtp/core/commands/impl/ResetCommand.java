@@ -1,23 +1,23 @@
-package org.mailster.smtp.core.command.impl;
+package org.mailster.smtp.core.commands.impl;
 
 import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.command.AbstractCommand;
+import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
- * The QUIT command implementation.
+ * The RSET command implementation.
  * 
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;
  * @author Ian McFarland &lt;ian@neo.com&gt;
  * @author Jon Stevens
  */
-public class QuitCommand extends AbstractCommand
+public class ResetCommand extends AbstractCommand
 {
-	public QuitCommand()
+	public ResetCommand()
 	{
-		super("QUIT", "The QUIT command closes the SMTP session");
+		super("RSET", "The RSET command resets the state of the mail session");
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class QuitCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		ctx.getSession().quit();
-		sendResponse(ioSession, "221 Bye");		
+		resetContext(ctx);
+		sendResponse(ioSession, "250 Ok");
 	}
 }

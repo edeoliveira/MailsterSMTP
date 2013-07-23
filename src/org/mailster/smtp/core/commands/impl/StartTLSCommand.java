@@ -1,11 +1,11 @@
-package org.mailster.smtp.core.command.impl;
+package org.mailster.smtp.core.commands.impl;
 
 import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.ssl.SslFilter;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.command.AbstractCommand;
+import org.mailster.smtp.core.commands.AbstractCommand;
 import org.mailster.smtp.util.DummySSLSocketFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

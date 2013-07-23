@@ -1,17 +1,17 @@
-package org.mailster.smtp.core.command;
+package org.mailster.smtp.core.commands;
 
-import org.mailster.smtp.core.command.impl.AuthCommand;
-import org.mailster.smtp.core.command.impl.DataCommand;
-import org.mailster.smtp.core.command.impl.DataEndCommand;
-import org.mailster.smtp.core.command.impl.EhloCommand;
-import org.mailster.smtp.core.command.impl.HeloCommand;
-import org.mailster.smtp.core.command.impl.HelpCommand;
-import org.mailster.smtp.core.command.impl.MailCommand;
-import org.mailster.smtp.core.command.impl.NoopCommand;
-import org.mailster.smtp.core.command.impl.QuitCommand;
-import org.mailster.smtp.core.command.impl.ReceiptCommand;
-import org.mailster.smtp.core.command.impl.ResetCommand;
-import org.mailster.smtp.core.command.impl.StartTLSCommand;
+import org.mailster.smtp.core.commands.impl.AuthCommand;
+import org.mailster.smtp.core.commands.impl.DataCommand;
+import org.mailster.smtp.core.commands.impl.DataEndCommand;
+import org.mailster.smtp.core.commands.impl.EhloCommand;
+import org.mailster.smtp.core.commands.impl.HeloCommand;
+import org.mailster.smtp.core.commands.impl.HelpCommand;
+import org.mailster.smtp.core.commands.impl.MailCommand;
+import org.mailster.smtp.core.commands.impl.NoopCommand;
+import org.mailster.smtp.core.commands.impl.QuitCommand;
+import org.mailster.smtp.core.commands.impl.ReceiptCommand;
+import org.mailster.smtp.core.commands.impl.ResetCommand;
+import org.mailster.smtp.core.commands.impl.StartTLSCommand;
 
 
 /**

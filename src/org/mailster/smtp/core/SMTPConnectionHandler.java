@@ -14,9 +14,9 @@ import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.mailster.smtp.SMTPServerConfig;
 import org.mailster.smtp.api.TooMuchDataException;
 import org.mailster.smtp.api.handler.DeliveryHandlerFactory;
-import org.mailster.smtp.core.command.Command;
-import org.mailster.smtp.core.command.CommandException;
-import org.mailster.smtp.core.command.CommandHandler;
+import org.mailster.smtp.core.commands.Command;
+import org.mailster.smtp.core.commands.CommandException;
+import org.mailster.smtp.core.commands.CommandHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.mailster.smtp.core.command.impl;
+package org.mailster.smtp.core.commands.impl;
 
 import java.io.IOException;
 import java.util.Set;
@@ -7,8 +7,8 @@ import java.util.TreeSet;
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.SMTPServerConfig;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.command.AbstractCommand;
-import org.mailster.smtp.core.command.CommandException;
+import org.mailster.smtp.core.commands.AbstractCommand;
+import org.mailster.smtp.core.commands.CommandException;
 
 /**
  * The HELP command implementation.

@@ -24,7 +24,7 @@ import org.mailster.smtp.core.SMTPCodecDecoder;
 import org.mailster.smtp.core.SMTPCodecFactory;
 import org.mailster.smtp.core.SMTPConnectionHandler;
 import org.mailster.smtp.core.auth.AuthenticationHandlerFactory;
-import org.mailster.smtp.core.command.CommandHandler;
+import org.mailster.smtp.core.commands.CommandHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
