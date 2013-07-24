@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.api.TooMuchDataException;
-import org.mailster.smtp.api.handler.RejectException;
 import org.mailster.smtp.core.SMTPContext;
 import org.mailster.smtp.core.commands.AbstractCommand;
 
@@ -25,16 +24,8 @@ public class DataEndCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws TooMuchDataException, IOException
 	{
-		try
-		{
-			ctx.getDeliveryHandler().data(ctx.getInputStream());
-			ctx.reset();
-			sendResponse(ioSession, "250 Ok");
-		}
-		catch (RejectException ex)
-		{
-			ctx.reset();
-			sendResponse(ioSession, ex.getMessage());
-		}
+		ctx.getDeliveryHandler().data(ctx.getInputStream());
+		ctx.reset();
+		sendResponse(ioSession, "250 Ok");
 	}
 }

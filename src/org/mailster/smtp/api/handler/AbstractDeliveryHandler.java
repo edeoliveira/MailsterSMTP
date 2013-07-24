@@ -141,12 +141,11 @@ abstract public class AbstractDeliveryHandler
 	 *
 	 * @param data will be the smtp data stream, stripped of any extra '.' chars
 	 *
-	 * @throws RejectException if at any point the data should be rejected.
 	 * @throws TooMuchDataException if the listener can't handle that much data.
 	 *         An error will be reported to the client.
 	 * @throws IOException if there is an IO error reading the input data.
 	 */
-	public abstract void data(InputStream data) throws RejectException, TooMuchDataException, IOException;
+	public abstract void data(InputStream data) throws TooMuchDataException, IOException;
 	
 	/**
 	 * This method is called whenever a RSET command is sent or after the end of 

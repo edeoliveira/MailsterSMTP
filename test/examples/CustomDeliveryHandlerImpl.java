@@ -29,7 +29,7 @@ public class CustomDeliveryHandlerImpl
 	}
 
 	@Override
-	public void data(InputStream data) throws RejectException,
+	public void data(InputStream data) throws
 			TooMuchDataException, IOException 
 	{
 		// TODO This is where mail data is really delivered 
