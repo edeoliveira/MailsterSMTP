@@ -26,7 +26,7 @@ public abstract class ServerTestCase extends TestCase
 	{
 		public boolean accept(SessionContext ctx, String from, String recipient)
 		{
-            return !recipient.equals("failure@subethamail.org");
+            return !recipient.equals("failure@example.org");
         }
 	}
 	

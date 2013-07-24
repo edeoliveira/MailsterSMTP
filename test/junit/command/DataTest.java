@@ -31,7 +31,7 @@ public class DataTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250");
 
 		send("DATA");
@@ -45,10 +45,10 @@ public class DataTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250");
 
-		send("RCPT TO: success@subethamail.org");
+		send("RCPT TO: success@example.org");
 		expect("250");
 
 		send("DATA");
@@ -62,10 +62,10 @@ public class DataTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250");
 
-		send("RCPT TO: success@subethamail.org");
+		send("RCPT TO: success@example.org");
 		expect("250");
 
 		send("DATA");

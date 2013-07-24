@@ -31,7 +31,7 @@ public class ReceiptTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250 Ok");
 
 		send("RCPT");
@@ -45,13 +45,13 @@ public class ReceiptTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250 Ok");
 
-		send("RCPT TO: failure@subethamail.org");
-		expect("553 <failure@subethamail.org> address unknown.");
+		send("RCPT TO: failure@example.org");
+		expect("553 <failure@example.org> address unknown.");
 
-		send("RCPT TO: success@subethamail.org");
+		send("RCPT TO: success@example.org");
 		expect("250 Ok");
 	}
 
@@ -62,10 +62,10 @@ public class ReceiptTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM: success@subethamail.org");
+		send("MAIL FROM: success@example.org");
 		expect("250 Ok");
 
-		send("RCPT TO:success@subethamail.org");
+		send("RCPT TO:success@example.org");
 		expect("250 Ok");
 	}
 

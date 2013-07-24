@@ -106,7 +106,7 @@ public class BigAttachmentTest extends TestCase
 
 		baseMsg.setFrom(new InternetAddress("Ted <ted@home.com>"));
 		baseMsg.setRecipient(Message.RecipientType.TO, new InternetAddress(
-				"success@subethamail.org"));
+				"success@example.org"));
 		baseMsg.setSubject("Test Big attached file message");
 		baseMsg.setContent(multipart);
         baseMsg.saveChanges();
@@ -116,7 +116,7 @@ public class BigAttachmentTest extends TestCase
 		long started = System.currentTimeMillis();
         t.connect();
         t.sendMessage(baseMsg, new Address[] {new InternetAddress(
-				"success@subethamail.org")});
+				"success@example.org")});
         t.close();
         started = System.currentTimeMillis() - started;
         log.info("Elapsed ms = "+started);
@@ -124,7 +124,7 @@ public class BigAttachmentTest extends TestCase
         WiserMessage msg = server.getMessages().get(0);
         
         assertEquals(1, server.getMessages().size());		
-		assertEquals("success@subethamail.org", msg.getEnvelopeReceiver());
+		assertEquals("success@example.org", msg.getEnvelopeReceiver());
 		
 		File compareFile = File.createTempFile("attached", ".tmp");
 		log.debug("Writing received attachment ...");

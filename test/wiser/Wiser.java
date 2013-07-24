@@ -22,21 +22,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Wiser implements MessageListener
 {
-	/**
-	 * Creates the {@link LoginValidator} which logs the user/pass.
-	 */
-	/*private LoginValidator logValidator = new LoginValidator()
-	{
-		public void login(String username, String password)
-				throws LoginFailedException
-		{
-			log.debug("Username=" + username);
-			log.debug("Password=" + password);
-		}
-	};*/
-	
 	/** */
-	private final static Logger log = LoggerFactory.getLogger(Wiser.class);
+	private final static Logger LOG = LoggerFactory.getLogger(Wiser.class);
 
 	/** */
 	SMTPServer server;
@@ -146,7 +133,7 @@ public class Wiser implements MessageListener
 						String recipient, InputStream data) 
 		throws TooMuchDataException, IOException
 	{
-		log.debug("Delivering new message ...");
+		LOG.debug("Delivering new message ...");
 		WiserMessage msg = new WiserMessage(from, recipient, data);
 		this.queueMessage(msg);
 	}

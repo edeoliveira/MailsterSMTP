@@ -86,7 +86,7 @@ public class MailTest extends ServerTestCase
 		send("HELO foo.com");
 		expect("250");
 
-		send("MAIL FROM:<validuser@subethamail.org>");
+		send("MAIL FROM:<validuser@example.org>");
 		expect("250 Ok");
 	}
 }

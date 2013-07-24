@@ -81,8 +81,8 @@ public class DefaultDeliveryHandler
 	 * Implementation of the data receiving portion of things. By default
 	 * deliver a copy of the stream to each recipient of the message(the first 
 	 * recipient is provided the original stream to save memory space). If
-	 * you would like to change this behavior, then you should implement
-	 * the MessageHandler interface yourself.
+	 * you want to change this behavior, then you should implement the
+	 * MessageHandler interface yourself.
 	 */
 	public void data(InputStream data) 
 		throws TooMuchDataException, IOException
