@@ -29,7 +29,7 @@ public class ResetCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		resetContext(ctx);
+		ctx.reset();
 		sendResponse(ioSession, "250 Ok");
 	}
 }

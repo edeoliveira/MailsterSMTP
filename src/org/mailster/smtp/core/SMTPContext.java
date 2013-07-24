@@ -84,4 +84,10 @@ public class SMTPContext implements DeliveryContext
 	{
 		this.credential = credential;
 	}
+	
+	public void reset()
+	{
+		session.reset();
+		deliveryHandler.resetMessageState();
+	}	
 }
