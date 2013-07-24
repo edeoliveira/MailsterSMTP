@@ -2,7 +2,6 @@ package org.mailster.smtp.core.commands;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -23,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class CommandHandler
 {
 	private Map<String, Command> commandMap = new HashMap<String, Command>();
-	private static Logger log = LoggerFactory.getLogger(CommandHandler.class);
+	private static Logger LOG = LoggerFactory.getLogger(CommandHandler.class);
 	
 	/**
 	 * Populates a default set of commands based with the BuiltinCommandRegistry commands.
@@ -32,68 +31,49 @@ public class CommandHandler
 	{
 		for(BuiltinCommandRegistry entry : BuiltinCommandRegistry.values())
 		{
-			try 
-			{
-				addCommand(entry.getNewInstance());
-			} 
-			catch (Exception e) 
-			{
-				log.info("Unable to instantiate command {}", entry.getClassName());
-			}
-		}
-	}
-
-	/**
-	 * Pass in a Collection of Command objects.
-	 * @param availableCommands
-	 */
-	public CommandHandler(Collection<Command> availableCommands)
-	{
-		for(Command command :availableCommands )
-		{
-			addCommand(command);
+			addCommand(entry.getCommand());
 		}
 	}
 	
 	/**
 	 * Adds a new command to the map.
-	 * @param command the command to add
+	 * @param cmd the command to add
 	 */
-	public void addCommand(Command command)
+	public void addCommand(Command cmd)
 	{
-		log.debug("Added command {}", command.getName());
+		LOG.debug("Added command {}", cmd.getName());
 		
-		if (command instanceof AbstractCommand)
-			((AbstractCommand) command).setCommandHandler(this);
+		if (cmd instanceof AbstractCommand)
+			((AbstractCommand) cmd).setCommandHandler(this);
 		
-		this.commandMap.put(command.getName(), command);
+		this.commandMap.put(cmd.getName(), cmd);
 	}
 
 	/**
 	 * Does the map contain the named command?
-	 * @param command
+	 * @param cmd
 	 * @return true if the command exists
 	 */
-	public boolean containsCommand(String command)
+	public boolean containsCommand(String cmd)
 	{
-		return this.commandMap.containsKey(command);
+		return this.commandMap.containsKey(cmd);
 	}
 
 	/**
 	 * Calls the execute method on a command.
 	 * 
 	 * @param ctx
-	 * @param commandString
+	 * @param cmdString
 	 * @throws SocketTimeoutException
 	 * @throws IOException
 	 */
-	public void handleCommand(String commandString, IoSession session, SMTPContext ctx)
+	public void handleCommand(String cmdString, IoSession session, SMTPContext ctx)
 		throws IOException
 	{
 		try
 		{	
-			Command cmd = getCommandFromString(commandString);
-			cmd.execute(commandString, session, ctx);
+			Command cmd = getCommandFromString(cmdString);
+			cmd.execute(cmdString, session, ctx);
 		}
 		catch (CommandException e)
 		{
@@ -119,21 +99,21 @@ public class CommandHandler
 	/**
 	 * Given a string, find the Command object.
 	 * 
-	 * @param commandString
+	 * @param cmdString
 	 * @return The command object.
 	 * @throws UnknownCommandException
 	 * @throws InvalidCommandNameException
 	 */
-	public Command getCommandFromString(String commandString)
+	public Command getCommandFromString(String cmdString)
 		throws UnknownCommandException, InvalidCommandNameException
 	{
-        String verb = toVerb(commandString);
+        String verb = toVerb(cmdString);
 
-	    Command command = this.commandMap.get(verb);
-		if (command == null)
+	    Command cmd = this.commandMap.get(verb);
+		if (cmd == null)
 		    throw new UnknownCommandException("Command not implemented");
 		
-		return command;
+		return cmd;
 	}
 	
 	/** */

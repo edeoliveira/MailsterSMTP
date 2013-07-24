@@ -36,21 +36,21 @@ public enum BuiltinCommandRegistry
 	// Add a fake command to handle the asynchronous end of DATA 
     DATA_END(DataEndCommand.class);
 
-	private Class<? extends Command> commandClass;
+	private Command instance;
 
 	private BuiltinCommandRegistry(Class<? extends Command> c)
 	{
-		this.commandClass = c;
-	}
-
-	public String getClassName()
-	{
-		return commandClass.getSimpleName();
+		try
+		{
+			this.instance = c.newInstance();
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 	
-	public Command getNewInstance() 
-		throws InstantiationException, IllegalAccessException
+	public Command getCommand() 
 	{
-		return this.commandClass.newInstance();
+		return instance;
 	}
 }
