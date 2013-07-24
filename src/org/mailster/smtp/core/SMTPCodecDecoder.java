@@ -185,7 +185,7 @@ public class SMTPCodecDecoder implements ProtocolDecoder
                         	if (dataMode)
                         	{
                         		delimBuf = SMTP_CMD_DELIMITER;
-                        		out.write(ctx.getInputStream());                        		
+                        		out.write(ctx.getNewInputStream());                        		
                         	}
                         	else
                         	{

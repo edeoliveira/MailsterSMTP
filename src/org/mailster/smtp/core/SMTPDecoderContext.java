@@ -170,7 +170,7 @@ public class SMTPDecoderContext
 	}
 	
 	/** */
-	protected InputStream getInputStream() throws IOException
+	protected InputStream getNewInputStream() throws IOException
 	{		
 		if (this.thresholdReached)
 			return new SharedTmpFileInputStream(this.outFile);
