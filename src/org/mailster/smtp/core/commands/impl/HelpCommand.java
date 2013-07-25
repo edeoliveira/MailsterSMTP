@@ -73,9 +73,6 @@ public class HelpCommand extends AbstractCommand
 		
 		for (String key : set)
 		{
-			if ("DATA_END".equals(key))
-				continue; // skip it as it is not a real command
-			
 			sb.append("214-  ");
 			sb.append(key);
 			sb.append("\r\n");

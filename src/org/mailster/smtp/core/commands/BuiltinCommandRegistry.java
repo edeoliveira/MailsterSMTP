@@ -2,7 +2,6 @@ package org.mailster.smtp.core.commands;
 
 import org.mailster.smtp.core.commands.impl.AuthCommand;
 import org.mailster.smtp.core.commands.impl.DataCommand;
-import org.mailster.smtp.core.commands.impl.DataEndCommand;
 import org.mailster.smtp.core.commands.impl.EhloCommand;
 import org.mailster.smtp.core.commands.impl.HeloCommand;
 import org.mailster.smtp.core.commands.impl.HelpCommand;
@@ -31,11 +30,8 @@ public enum BuiltinCommandRegistry
 	QUIT(QuitCommand.class), 
 	RCPT(ReceiptCommand.class), 
 	RSET(ResetCommand.class), 
-	STARTTLS(StartTLSCommand.class), 
+	STARTTLS(StartTLSCommand.class); 
 	
-	// Add a fake command to handle the asynchronous end of DATA 
-    DATA_END(DataEndCommand.class);
-
 	private Command instance;
 
 	private BuiltinCommandRegistry(Class<? extends Command> c)

@@ -214,7 +214,9 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 			minaCtx.setInputStream((InputStream) message);
 			try
 			{
-				this.commandHandler.handleCommand("DATA_END", session, minaCtx);
+				minaCtx.getDeliveryHandler().data(minaCtx.getInputStream());
+				minaCtx.reset();
+				sendResponse(session, "250 Ok");
 			}
 			catch (TooMuchDataException tmdEx)
 			{
