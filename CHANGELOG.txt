@@ -1,4 +1,9 @@
 #####
+2013-07-25
+Deprecated CHANGELOG file as functionnality is provided by GitHub
+website from now on.
+
+#####
 Version 1.0.0-M2 (2009-02-10) - Codename A new dawn
 
 - Added ASF license file.
