@@ -21,8 +21,8 @@ import junit.framework.TestCase;
 
 import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.api.MessageListenerAdapter;
-import org.mailster.smtp.api.SessionContext;
-import org.mailster.smtp.api.TooMuchDataException;
+import org.mailster.smtp.api.handler.SessionContext;
+import org.mailster.smtp.core.TooMuchDataException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

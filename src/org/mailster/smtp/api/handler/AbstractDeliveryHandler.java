@@ -8,9 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.mailster.smtp.api.MessageListener;
-import org.mailster.smtp.api.SessionContext;
-import org.mailster.smtp.api.TooMuchDataException;
 import org.mailster.smtp.core.SMTPContext;
+import org.mailster.smtp.core.TooMuchDataException;
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.core.auth.Credential;
 import org.mailster.smtp.core.auth.LoginFailedException;

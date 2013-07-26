@@ -3,6 +3,9 @@ package org.mailster.smtp.api;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.mailster.smtp.api.handler.SessionContext;
+import org.mailster.smtp.core.TooMuchDataException;
+
 
 /**
  * An adapter to the {@link MessageListener} interface.

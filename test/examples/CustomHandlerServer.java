@@ -5,8 +5,8 @@ import java.io.InputStream;
 
 import org.mailster.smtp.SMTPServer;
 import org.mailster.smtp.api.MessageListenerAdapter;
-import org.mailster.smtp.api.SessionContext;
-import org.mailster.smtp.api.TooMuchDataException;
+import org.mailster.smtp.api.handler.SessionContext;
+import org.mailster.smtp.core.TooMuchDataException;
 
 /**
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;

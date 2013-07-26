@@ -2,7 +2,7 @@ package junit.util;
 
 import junit.framework.TestCase;
 
-import org.mailster.smtp.api.SessionContext;
+import org.mailster.smtp.api.handler.SessionContext;
 
 import wiser.Wiser;
 
