@@ -20,18 +20,18 @@ public class SMTPServerConfig
 	/**
 	 * Server version
 	 */
-	public static final String VERSION = "1.0.0-M2";
+	public static final String VERSION = "1.0.0-M3";
 
 	/**
 	 * 4 megs by default. The server will buffer incoming messages to disk
 	 * when they hit this limit in the DATA received.
 	 */
-	public final static int DEFAULT_DATA_DEFERRED_SIZE = 1024*1024*4;
+	public static final int DEFAULT_DATA_DEFERRED_SIZE = 1024*1024*4;
 	
 	/**
 	 * The default charset is ISO-8859-1.
 	 */
-	public final static Charset DEFAULT_CHARSET = Charset.forName("ISO-8859-1");
+	public static final Charset DEFAULT_CHARSET = Charset.forName("ISO-8859-1");
 
 	/**
 	 * The charset in use. Defaults to DEFAULT_CHARSET.
@@ -72,7 +72,7 @@ public class SMTPServerConfig
 	
 	/**
 	 * Data limit size before writing it to the disk.
-	 * Defaults to DEFAULT_DATA_DEFERRED_SIZE.
+	 * Defaults to {@link #DEFAULT_DATA_DEFERRED_SIZE}.
 	 */
 	private int dataDeferredSize = DEFAULT_DATA_DEFERRED_SIZE;
 
@@ -301,7 +301,7 @@ public class SMTPServerConfig
 	}
 
 	/**
-	 * Sets the charset to use.
+	 * Sets the charset to use. Defaults to {@link #DEFAULT_CHARSET}.
 	 */
 	public void setCharset(Charset charset) 
 	{
