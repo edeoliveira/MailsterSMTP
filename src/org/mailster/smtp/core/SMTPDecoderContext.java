@@ -37,9 +37,9 @@ public class SMTPDecoderContext
 	/** If we switch to file output, this is the stream to write to the file. */ 
 	private FileOutputStream stream;
 	
-	private SMTPCodecDecoder decoder;
+	private SMTPDecoder decoder;
 	
-    protected SMTPDecoderContext(SMTPCodecDecoder decoder) 
+    protected SMTPDecoderContext(SMTPDecoder decoder) 
     {
     	this.decoder = decoder;
     	charsetDecoder = decoder.getCharset().newDecoder();
@@ -145,8 +145,8 @@ public class SMTPDecoderContext
 	private void thresholdReached() 
 		throws IOException
 	{
-		this.outFile = File.createTempFile(SMTPCodecDecoder.TMPFILE_PREFIX, 
-				SMTPCodecDecoder.TMPFILE_SUFFIX);
+		this.outFile = File.createTempFile(SMTPDecoder.TMPFILE_PREFIX, 
+				SMTPDecoder.TMPFILE_SUFFIX);
 
 		log.debug("Writing message to file : {}", outFile.getAbsolutePath());
 		

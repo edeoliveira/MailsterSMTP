@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.SMTPServerConfig;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.Session;
+import org.mailster.smtp.core.SMTPState;
 import org.mailster.smtp.core.auth.AuthenticationHandler;
 import org.mailster.smtp.core.auth.impl.DummyAuthenticationHandler;
 import org.mailster.smtp.core.commands.AbstractCommand;
@@ -50,13 +50,13 @@ public class EhloCommand extends AbstractCommand
 		//		250-ETRN
 		//		250 8BITMIME
 
-		Session session = ctx.getSession();
+		SMTPState smtpState = ctx.getSMTPState();
 		StringBuilder response = new StringBuilder();
-		if (!session.getHasSeenHelo())
+		if (!smtpState.getHasSeenHelo())
 		{
 			SMTPServerConfig cfg = ctx.getSMTPServerConfig();
 			
-			session.setHasSeenHelo(true);
+			smtpState.setHasSeenHelo(true);
 			response.append("250-");
 			response.append(cfg.getHostName());
 			response.append("\r\n");

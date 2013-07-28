@@ -1,26 +1,24 @@
 package org.mailster.smtp.core;
 
 /**
- * A session describes events which happen during a
- * SMTP session. It keeps track of all of the recipients
- * who will receive the message.
+ * Describes the state of an SMTP session. 
  * 
  * @author Edouard De Oliveira &lt;doe_wanted@yahoo.fr&gt;
  * @author Ian McFarland &lt;ian@neo.com&gt;
  * @author Jon Stevens
  * @author Jeff Schnitzer
  */
-public class Session
+public class SMTPState
 {
-	private boolean authenticating 	= false;
-	private boolean authenticated 	= false;
-	private boolean dataMode 		= false;
-	private boolean hasSeenHelo 	= false;
-	private boolean active 			= true;
-	private boolean hasSender 		= false;
-	private int recipientCount 		= 0;
+	private boolean authenticating	= false;
+	private boolean authenticated	= false;
+	private boolean dataMode		= false;
+	private boolean hasSeenHelo		= false;
+	private boolean active			= true;
+	private boolean hasSender		= false;
+	private int recipientCount		= 0;
 	
-	public Session()
+	public SMTPState()
 	{
 	}
 

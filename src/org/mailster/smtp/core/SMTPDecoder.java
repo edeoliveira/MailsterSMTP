@@ -34,12 +34,12 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
  * 
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;
  */
-public class SMTPCodecDecoder implements ProtocolDecoder 
+public class SMTPDecoder implements ProtocolDecoder 
 {
-    private final static String CONTEXT = SMTPCodecDecoder.class.getName()+ ".context";
+	private final static String CONTEXT = SMTPDecoder.class.getName()+ ".context";
 
-	protected final static String TMPFILE_PREFIX = "mailsterSmtp";
-	protected final static String TMPFILE_SUFFIX = ".eml";
+    protected final static String TMPFILE_PREFIX = "mailsterSmtp";
+    protected final static String TMPFILE_SUFFIX = ".eml";
 
     private final static byte[] SMTP_CMD_DELIMITER = new byte[] {'\r','\n'};
     private final static byte[] SMTP_DATA_DELIMITER = new byte[] {'\r','\n', '.', '\r','\n'};
@@ -58,7 +58,7 @@ public class SMTPCodecDecoder implements ProtocolDecoder
 	 * Creates a new instance with the specified <tt>charset</tt> and the
 	 * specified <tt>thresholdBytes</tt> deferring size.
 	 */
-    public SMTPCodecDecoder(Charset charset, int thresholdBytes) 
+    public SMTPDecoder(Charset charset, int thresholdBytes) 
     {
         setup(charset, thresholdBytes);       
     }
@@ -146,7 +146,7 @@ public class SMTPCodecDecoder implements ProtocolDecoder
         SMTPContext minaCtx = (SMTPContext) 
         	session.getAttribute(SMTPConnectionHandler.CONTEXT_ATTRIBUTE);
 
-        boolean dataMode = minaCtx.getSession().isDataMode();
+        boolean dataMode = minaCtx.getSMTPState().isDataMode();
         ctx.setDataMode(dataMode);
         byte[] delimBuf = dataMode ? SMTP_DATA_DELIMITER : SMTP_CMD_DELIMITER;
 

@@ -20,7 +20,7 @@ public class SMTPContext implements DeliveryContext
 {
 	private SMTPServerConfig cfg;
 	
-	private Session session;	
+	private SMTPState smtpState;	
 	private SocketAddress remoteAddress;
 	private Credential credential;
 	
@@ -34,7 +34,7 @@ public class SMTPContext implements DeliveryContext
 	{
 		this.cfg = cfg;
 		this.remoteAddress = ioSession.getRemoteAddress();
-		this.session = new Session();
+		this.smtpState = new SMTPState();
 		
 		this.deliveryHandler = factory.create(this);
 		this.authenticationHandler = deliveryHandler.getAuthenticationHandler();
@@ -60,9 +60,9 @@ public class SMTPContext implements DeliveryContext
 		this.inputStream = inputStream;
 	}
 
-	public Session getSession()
+	public SMTPState getSMTPState()
 	{
-		return session;
+		return smtpState;
 	}
 
 	public SocketAddress getRemoteAddress()
@@ -87,7 +87,7 @@ public class SMTPContext implements DeliveryContext
 	
 	public void reset()
 	{
-		session.reset();
+		smtpState.reset();
 		deliveryHandler.resetMessageState();
 	}	
 }

@@ -29,7 +29,7 @@ public class QuitCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		ctx.getSession().quit();
+		ctx.getSMTPState().quit();
 		sendResponse(ioSession, "221 Bye");		
 	}
 }

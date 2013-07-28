@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.Session;
+import org.mailster.smtp.core.SMTPState;
 import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
@@ -26,20 +26,20 @@ public class DataCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		Session session = ctx.getSession();
+		SMTPState smtpState = ctx.getSMTPState();
 
-		if (!session.getHasSender())
+		if (!smtpState.getHasSender())
 		{
 			sendResponse(ioSession, "503 Error: need MAIL command");
 			return;
 		}
-		else if (session.getRecipientCount() == 0)
+		else if (smtpState.getRecipientCount() == 0)
 		{
 			sendResponse(ioSession, "503 Error: need RCPT command");
 			return;
 		}
 
-		session.setDataMode(true);
+		smtpState.setDataMode(true);
 		sendResponse(ioSession, "354 End data with <CR><LF>.<CR><LF>");		
 	}
 }

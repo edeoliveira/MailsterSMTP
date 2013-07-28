@@ -38,7 +38,7 @@ public class HeloCommand extends AbstractCommand
 			return;
 		}
 
-		ctx.getSession().setHasSeenHelo(true);
+		ctx.getSMTPState().setHasSeenHelo(true);
 		sendResponse(ioSession, "250 " + ctx.getSMTPServerConfig().getHostName());
 	}
 }

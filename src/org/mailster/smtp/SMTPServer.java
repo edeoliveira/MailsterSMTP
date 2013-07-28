@@ -20,7 +20,7 @@ import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.api.handler.AbstractDeliveryHandler;
 import org.mailster.smtp.api.handler.DeliveryHandlerFactory;
-import org.mailster.smtp.core.SMTPCodecDecoder;
+import org.mailster.smtp.core.SMTPDecoder;
 import org.mailster.smtp.core.SMTPCodecFactory;
 import org.mailster.smtp.core.SMTPConnectionHandler;
 import org.mailster.smtp.core.auth.AuthenticationHandlerFactory;
@@ -175,7 +175,7 @@ public class SMTPServer
 			throw new RuntimeException("Error: server has been shutdown previously");
 		
 		// Read smtp decoder configuration options
-		((SMTPCodecDecoder) codecFactory.getDecoder(null)).
+		((SMTPDecoder) codecFactory.getDecoder(null)).
 			setup(getConfig().getCharset(), getConfig().getDataDeferredSize());
 		
 		InetSocketAddress isa;

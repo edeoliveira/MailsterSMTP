@@ -73,7 +73,7 @@ public class StartTLSCommand extends AbstractCommand
 
 			// Disable encryption temporarily.
 			// This attribute will be removed by SSLFilter
-			// inside the Session.write() call below.
+			// inside the SMTPState.write() call below.
 			ioSession.setAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE, Boolean.TRUE);
 
 			// Write StartTLSResponse which won't be encrypted.
@@ -82,7 +82,7 @@ public class StartTLSCommand extends AbstractCommand
 			// Now DISABLE_ENCRYPTION_ONCE attribute is cleared.
 			assert ioSession.getAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE) == null;
 
-			ctx.getSession().resetAll(); // clean state
+			ctx.getSMTPState().resetAll(); // clean state
 			ctx.getDeliveryHandler().resetMessageState();
 		}
 		catch (Exception e)

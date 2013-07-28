@@ -229,10 +229,10 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 			if (log.isDebugEnabled())
 				log.debug("C: " + line);
 			
-            if (minaCtx.getSession().isAuthenticating())
+            if (minaCtx.getSMTPState().isAuthenticating())
             	this.commandHandler.handleAuthChallenge(line, session, minaCtx);
             else
-            if (!minaCtx.getSession().isAuthenticated() 
+            if (!minaCtx.getSMTPState().isAuthenticated() 
             		&& !minaCtx.getAuthenticationHandler().getAuthenticationMechanisms().isEmpty())
             {
             	// Per RFC 2554
@@ -258,7 +258,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 			session.write(response);
 		
 		SMTPContext minaCtx = (SMTPContext) session.getAttribute(CONTEXT_ATTRIBUTE);
-		if (!minaCtx.getSession().isActive())
+		if (!minaCtx.getSMTPState().isActive())
 			session.close(false);
 	}
 }

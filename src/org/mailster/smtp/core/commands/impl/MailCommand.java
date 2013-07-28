@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.api.handler.RejectException;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.Session;
+import org.mailster.smtp.core.SMTPState;
 import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
@@ -26,12 +26,12 @@ public class MailCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		Session session = ctx.getSession();
-		if (!session.getHasSeenHelo())
+		SMTPState smtpState = ctx.getSMTPState();
+		if (!smtpState.getHasSeenHelo())
 		{
 			sendResponse(ioSession, "503 Error: send HELO/EHLO first");
 		}
-		else if (session.getHasSender())
+		else if (smtpState.getHasSender())
 		{
 			sendResponse(ioSession, "503 Sender already specified");
 		}
@@ -57,7 +57,7 @@ public class MailCommand extends AbstractCommand
 				try
 				{
 					ctx.getDeliveryHandler().from(emailAddress);
-					session.setHasSender(true);
+					smtpState.setHasSender(true);
 					sendResponse(ioSession, "250 Ok");
 				}
 				catch (RejectException ex)

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.Session;
+import org.mailster.smtp.core.SMTPState;
 import org.mailster.smtp.core.auth.LoginFailedException;
 import org.mailster.smtp.core.commands.AbstractCommand;
 
@@ -39,15 +39,15 @@ public class AuthCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		Session session = ctx.getSession();
+		SMTPState smtpState = ctx.getSMTPState();
 		
-		if (session.isAuthenticated())
+		if (smtpState.isAuthenticated())
 		{
 			sendResponse(ioSession, "503 Refusing any other AUTH command");
 			return;
 		}
 
-		boolean authenticating = session.isAuthenticating();
+		boolean authenticating = smtpState.isAuthenticating();
 		
 		if (!authenticating)
 		{
@@ -86,7 +86,7 @@ public class AuthCommand extends AbstractCommand
 			StringBuilder response = new StringBuilder();
 			boolean finished = ctx.getAuthenticationHandler().auth(commandString, response, ctx);
 			
-			session.setAuthenticating(!finished);
+			smtpState.setAuthenticating(!finished);
 			
 			if (!finished)
 			{
@@ -95,14 +95,14 @@ public class AuthCommand extends AbstractCommand
 				return;
 			}
 
-			session.setAuthenticated(true);
+			smtpState.setAuthenticated(true);
 			sendResponse(ioSession, "235 Authentication successful");
 		}
 		catch (LoginFailedException ex)
 		{
 			sendResponse(ioSession, "535 Authentication failure");
-			session.setAuthenticated(false);
-			session.setAuthenticating(false);
+			smtpState.setAuthenticated(false);
+			smtpState.setAuthenticating(false);
 		}
 	}
 }

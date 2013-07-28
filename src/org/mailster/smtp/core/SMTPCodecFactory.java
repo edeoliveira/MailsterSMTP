@@ -25,7 +25,7 @@ public class SMTPCodecFactory implements ProtocolCodecFactory
 {
 	private final TextLineEncoder encoder;
 
-	private final SMTPCodecDecoder decoder;
+	private final SMTPDecoder decoder;
 
 	/**
 	 * Creates a new instance using the configuration.
@@ -41,7 +41,7 @@ public class SMTPCodecFactory implements ProtocolCodecFactory
 	protected SMTPCodecFactory(Charset charset, int dataDeferredSize)
 	{
 		encoder = new TextLineEncoder(charset, LineDelimiter.CRLF);
-		decoder = new SMTPCodecDecoder(charset, dataDeferredSize);
+		decoder = new SMTPDecoder(charset, dataDeferredSize);
 	}
 
 	public ProtocolEncoder getEncoder(IoSession session)

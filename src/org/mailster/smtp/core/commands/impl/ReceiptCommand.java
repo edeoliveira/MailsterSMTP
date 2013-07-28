@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.api.handler.RejectException;
 import org.mailster.smtp.core.SMTPContext;
-import org.mailster.smtp.core.Session;
+import org.mailster.smtp.core.SMTPState;
 import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
@@ -28,15 +28,15 @@ public class ReceiptCommand extends AbstractCommand
 	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
 		throws IOException
 	{
-		Session session = ctx.getSession();
-		if (!session.getHasSender())
+		SMTPState smtpState = ctx.getSMTPState();
+		if (!smtpState.getHasSender())
 		{
 			sendResponse(ioSession, "503 Error: need MAIL command");
 			return;
 		}
 		
 		int max = ctx.getSMTPServerConfig().getMaxRecipients();
-		if (max > -1 && session.getRecipientCount() >= max)
+		if (max > -1 && smtpState.getRecipientCount() >= max)
 		{
 			sendResponse(ioSession, "452 Too many recipients");
 			return;
@@ -49,7 +49,7 @@ public class ReceiptCommand extends AbstractCommand
 			try
 			{
 				ctx.getDeliveryHandler().recipient(recipientAddress);
-				session.addRecipient();
+				smtpState.addRecipient();
 				sendResponse(ioSession, "250 Ok");
 			}
 			catch (RejectException ex)
