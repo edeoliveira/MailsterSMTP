@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class Wiser implements MessageListener
 {
 	/** */
-	private final static Logger LOG = LoggerFactory.getLogger(Wiser.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Wiser.class);
 
 	/** */
 	SMTPServer server;

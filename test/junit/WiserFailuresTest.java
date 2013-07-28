@@ -23,8 +23,6 @@ import org.mailster.smtp.api.MessageListener;
 import org.mailster.smtp.api.MessageListenerAdapter;
 import org.mailster.smtp.api.handler.SessionContext;
 import org.mailster.smtp.core.TooMuchDataException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import wiser.Wiser;
 import wiser.WiserMessage;
@@ -38,7 +36,6 @@ public class WiserFailuresTest extends TestCase
 	private final static String HOST_NAME = "localhost";
 	private final static String TO_ADDRESS = "to-addr@localhost";
 	private final static int SMTP_PORT = 10081;
-	private static Logger log = LoggerFactory.getLogger(WiserFailuresTest.class);
 	private BufferedReader input;
 	private PrintWriter output;
 	private Wiser server;
@@ -79,8 +76,6 @@ public class WiserFailuresTest extends TestCase
 	 */
 	public void testMailFromAfterReset() throws IOException, MessagingException
 	{
-		log.info("testMailFromAfterReset() start");
-
 		assertConnect();
 		sendExtendedHello(HOST_NAME);
 		sendMailFrom(FROM_ADDRESS);

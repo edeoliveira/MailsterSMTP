@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class StartTLSCommand extends AbstractCommand
 {
-	private static Logger LOG = LoggerFactory.getLogger(StartTLSCommand.class);
+	private static final Logger LOG = LoggerFactory.getLogger(StartTLSCommand.class);
 
 	private static SslFilter sslFilter;
 

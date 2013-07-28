@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class CommandHandler
 {
 	private Map<String, Command> commandMap = new HashMap<String, Command>();
-	private static Logger LOG = LoggerFactory.getLogger(CommandHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CommandHandler.class);
 	
 	/**
 	 * Populates a default set of commands based with the BuiltinCommandRegistry commands.

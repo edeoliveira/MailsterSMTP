@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SMTPDecoderContext 
 {
-	private final static Logger log = LoggerFactory.getLogger(SMTPDecoderContext.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SMTPDecoderContext.class);
 	
 	private final CharsetDecoder charsetDecoder;
     private IoBuffer buf;
@@ -148,14 +148,14 @@ public class SMTPDecoderContext
 		this.outFile = File.createTempFile(SMTPDecoder.TMPFILE_PREFIX, 
 				SMTPDecoder.TMPFILE_SUFFIX);
 
-		log.debug("Writing message to file : {}", outFile.getAbsolutePath());
+		LOG.debug("Writing message to file : {}", outFile.getAbsolutePath());
 		
 		this.stream = new FileOutputStream(this.outFile);
 		this.buf.flip();
 		this.stream.write(asArray(this.buf));
 		this.thresholdReached = true;
 		this.buf.clear();
-		log.debug("ByteBuffer written to stream");
+		LOG.debug("ByteBuffer written to stream");
 	}
 	
 	/** */
@@ -165,7 +165,7 @@ public class SMTPDecoderContext
 		{
 			this.stream.flush();
 			this.stream.close();
-			log.debug("Temp file writing achieved - closing stream");
+			LOG.debug("Temp file writing achieved - closing stream");
 		}
 	}
 	

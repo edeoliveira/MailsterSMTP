@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultDeliveryHandler
 	extends AbstractDeliveryHandler
 {
-	private static Logger log = 
+	private static final Logger LOG = 
 		LoggerFactory.getLogger(DefaultDeliveryHandler.class);
 	
 	private List<Delivery> deliveries = new ArrayList<Delivery>();
@@ -89,7 +89,7 @@ public class DefaultDeliveryHandler
 	{
 		boolean useCopy = false;
 		
-		if (log.isTraceEnabled())
+		if (LOG.isTraceEnabled())
 		{
 			Charset charset = getDeliveryContext().getSMTPServerConfig().getCharset();
 			InputStream in = SharedStreamUtils.getPrivateInputStream(useCopy, data);
@@ -101,13 +101,13 @@ public class DefaultDeliveryHandler
 				int len;
 				while ((len=in.read(buf)) >= 0)
 				{
-					log.trace(decoder.decode(
+					LOG.trace(decoder.decode(
 						ByteBuffer.wrap(buf, 0, len)).toString());
 				}			
 			}
 			catch (IOException ioex)
 			{
-				log.trace("Mail data logging failed", ioex);
+				LOG.trace("Mail data logging failed", ioex);
 			}
 			useCopy = true;
 		}

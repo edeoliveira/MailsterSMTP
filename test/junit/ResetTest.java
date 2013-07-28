@@ -22,7 +22,7 @@ import wiser.Wiser;
  */
 public class ResetTest extends TestCase 
 {
-	private static final Logger log = LoggerFactory.getLogger(ResetTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ResetTest.class);
 	
 	public void testReset() 
 	{
@@ -45,12 +45,12 @@ public class ResetTest extends TestCase
 					size +=i;
 				}
 				
-				log.info("----------------------------------");
-				log.info("From: " + from);
-				log.info("To: " + recipient);
-				log.info("Length of incoming mail: " + bos.size());
-				log.info(new String(bos.toByteArray(), 0, 100));
-				log.info("----------------------------------\n\n");
+				LOG.info("----------------------------------");
+				LOG.info("From: " + from);
+				LOG.info("To: " + recipient);
+				LOG.info("Length of incoming mail: " + bos.size());
+				LOG.info(new String(bos.toByteArray(), 0, 100));
+				LOG.info("----------------------------------\n\n");
 				
 				if (receivedMailsCount == 1)
 				{

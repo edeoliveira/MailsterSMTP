@@ -40,13 +40,13 @@ import com.sun.mail.smtp.SMTPTransport;
  */
 public class BigAttachmentTest extends TestCase
 {
-	private final static Logger log = LoggerFactory.getLogger(BigAttachmentTest.class);
-	private final static int SMTP_PORT = 1085;
-	private final static String TO_CHANGE = "<path>/<your_bigfile.ext>";
-	private final static int BUFFER_SIZE = 32768;
+	private static final Logger LOG = LoggerFactory.getLogger(BigAttachmentTest.class);
+	private static final int SMTP_PORT = 1085;
+	private static final String TO_CHANGE = "<path>/<your_bigfile.ext>";
+	private static final int BUFFER_SIZE = 32768;
 		
 	// Set the full path name of the big file to use for the test.
-	private final static String BIGFILE_PATH = "C:/Program Files/VideoLAN/VLC/avcodec-51.dll";
+	private static final String BIGFILE_PATH = "C:/Program Files/VideoLAN/VLC/avcodec-51.dll";
 	
 	private Wiser server;
 	
@@ -80,7 +80,7 @@ public class BigAttachmentTest extends TestCase
 	{	
 		if (BIGFILE_PATH.equals(TO_CHANGE))
 		{
-			log.error("BigAttachmentTest: To complete this test you must change the BIGFILE_PATH var to point out a file on your disk !");
+			LOG.error("BigAttachmentTest: To complete this test you must change the BIGFILE_PATH var to point out a file on your disk !");
 		}
 		assertNotSame("BigAttachmentTest: To complete this test you must change the BIGFILE_PATH var to point out a file on your disk !", TO_CHANGE, BIGFILE_PATH);
 		Properties props = System.getProperties();
@@ -111,7 +111,7 @@ public class BigAttachmentTest extends TestCase
 		baseMsg.setContent(multipart);
         baseMsg.saveChanges();
         
-        log.debug("Send started");        
+        LOG.debug("Send started");        
         Transport t = new SMTPTransport(session, new URLName("smtp://localhost:"+SMTP_PORT));
 		long started = System.currentTimeMillis();
         t.connect();
@@ -119,7 +119,7 @@ public class BigAttachmentTest extends TestCase
 				"success@example.org")});
         t.close();
         started = System.currentTimeMillis() - started;
-        log.info("Elapsed ms = "+started);
+        LOG.info("Elapsed ms = "+started);
         
         WiserMessage msg = server.getMessages().get(0);
         
@@ -127,14 +127,14 @@ public class BigAttachmentTest extends TestCase
 		assertEquals("success@example.org", msg.getEnvelopeReceiver());
 		
 		File compareFile = File.createTempFile("attached", ".tmp");
-		log.debug("Writing received attachment ...");
+		LOG.debug("Writing received attachment ...");
 
 		FileOutputStream fos = new FileOutputStream(compareFile);
 		((MimeMultipart) msg.getMimeMessage().getContent()).getBodyPart(1).getDataHandler().writeTo(fos);
 		fos.close();
-		log.debug("Checking integrity ...");
+		LOG.debug("Checking integrity ...");
 		assertTrue(checkIntegrity(new File(BIGFILE_PATH), compareFile));
-		log.debug("Checking integrity DONE");
+		LOG.debug("Checking integrity DONE");
 		compareFile.delete();
 		msg.dispose();
 	}

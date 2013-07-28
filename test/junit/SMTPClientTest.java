@@ -44,7 +44,7 @@ public class SMTPClientTest extends TestCase
 {
 	/** */
 	@SuppressWarnings("unused")
-	private static Logger log = LoggerFactory.getLogger(SMTPClientTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SMTPClientTest.class);
 	
 	/** */
 	public static final int PORT = 2566;

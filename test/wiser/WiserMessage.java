@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class WiserMessage
 {
-	private final static Logger log = LoggerFactory.getLogger(WiserMessage.class);
+	private final static Logger LOG = LoggerFactory.getLogger(WiserMessage.class);
 
 	private String envelopeSender;
 	private String envelopeReceiver;
@@ -132,7 +132,7 @@ public class WiserMessage
 		}
 		catch (Throwable t)
 		{
-		    log.error("On WiserMessage dispose", t);
+		    LOG.error("On WiserMessage dispose", t);
 		}
 	}
 

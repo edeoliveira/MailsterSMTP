@@ -29,9 +29,9 @@ import org.slf4j.LoggerFactory;
 public class SMTPConnectionHandler extends IoHandlerAdapter
 {
 	// Session objects
-	public final static String CONTEXT_ATTRIBUTE = SMTPConnectionHandler.class.getName() + ".ctx";
+	public static final String CONTEXT_ATTRIBUTE = SMTPConnectionHandler.class.getName() + ".ctx";
 
-	private static Logger log = LoggerFactory.getLogger(SMTPConnectionHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SMTPConnectionHandler.class);
 
 	private SMTPServerConfig config;
 	
@@ -68,7 +68,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 	private void updateNumberOfConnections(int delta)
 	{
 		int count = numberOfConnections.addAndGet(delta);		
-		log.debug("Active connections count = {}", count);
+		LOG.debug("Active connections count = {}", count);
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 		session.setAttribute(SslFilter.USE_NOTIFICATION);
 
 		// Init protocol internals
-		log.debug("SMTP connection count: {}", getNumberOfConnections());
+		LOG.debug("SMTP connection count: {}", getNumberOfConnections());
 
 		SMTPContext minaCtx = new SMTPContext(config, factory, session);
 		session.setAttribute(CONTEXT_ATTRIBUTE, minaCtx);
@@ -105,7 +105,7 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 		{
 			if (hasTooManyConnections())
 			{
-				log.debug("Too many connections to the SMTP server !");
+				LOG.debug("Too many connections to the SMTP server !");
 				sendResponse(session, "554 Transaction failed. Too many connections.");
 			}
 			else
@@ -119,8 +119,8 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 			}
 			catch (IOException e) {}
 
-			if (log.isDebugEnabled())
-				log.debug("Error on session creation", e1);
+			if (LOG.isDebugEnabled())
+				LOG.debug("Error on session creation", e1);
 
 			session.close(false);
 		}
@@ -155,8 +155,8 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 	/** */
 	public void exceptionCaught(IoSession session, Throwable cause)
 	{
-		if (log.isDebugEnabled())
-			log.debug("Exception occured :", cause);
+		if (LOG.isDebugEnabled())
+			LOG.debug("Exception occured :", cause);
 		
 		boolean fatal = true;
 
@@ -194,15 +194,15 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 	{
 		if (message == null)
 		{
-			if (log.isDebugEnabled())
-				log.debug("no more lines from client");
+			if (LOG.isDebugEnabled())
+				LOG.debug("no more lines from client");
 			return;
 		}
 		
 		if (message instanceof SslFilterMessage)
 		{
-			if (log.isDebugEnabled())
-				log.debug("SSL FILTER message -> " + message);
+			if (LOG.isDebugEnabled())
+				LOG.debug("SSL FILTER message -> " + message);
 			return;
 		}
 
@@ -226,8 +226,8 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 		{
 			String line = (String) message;
 			
-			if (log.isDebugEnabled())
-				log.debug("C: " + line);
+			if (LOG.isDebugEnabled())
+				LOG.debug("C: " + line);
 			
             if (minaCtx.getSMTPState().isAuthenticating())
             	this.commandHandler.handleAuthChallenge(line, session, minaCtx);
@@ -251,8 +251,8 @@ public class SMTPConnectionHandler extends IoHandlerAdapter
 	/** */
 	public static void sendResponse(IoSession session, String response) throws IOException
 	{
-		if (log.isDebugEnabled())
-			log.debug("S: " + response);
+		if (LOG.isDebugEnabled())
+			LOG.debug("S: " + response);
 
 		if (response != null)
 			session.write(response);
