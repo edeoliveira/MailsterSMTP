@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class StartTLSCommand extends AbstractCommand
 {
-	private static Logger log = LoggerFactory.getLogger(StartTLSCommand.class);
+	private static Logger LOG = LoggerFactory.getLogger(StartTLSCommand.class);
 
 	private static SslFilter sslFilter;
 
@@ -73,7 +73,7 @@ public class StartTLSCommand extends AbstractCommand
 
 			// Disable encryption temporarily.
 			// This attribute will be removed by SSLFilter
-			// inside the SMTPState.write() call below.
+			// inside the Session.write() call below.
 			ioSession.setAttribute(SslFilter.DISABLE_ENCRYPTION_ONCE, Boolean.TRUE);
 
 			// Write StartTLSResponse which won't be encrypted.
@@ -87,8 +87,8 @@ public class StartTLSCommand extends AbstractCommand
 		}
 		catch (Exception e)
 		{
-			log.debug("startTLS() failed: {}", e.getMessage());
-			log.trace("startTLS() failure stack trace", e);			
+			LOG.debug("startTLS() failed: {}", e.getMessage());
+			LOG.trace("startTLS() failure stack trace", e);			
 		}
 	}
 }
