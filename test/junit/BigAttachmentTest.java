@@ -42,11 +42,8 @@ public class BigAttachmentTest extends TestCase
 {
 	private static final Logger LOG = LoggerFactory.getLogger(BigAttachmentTest.class);
 	private static final int SMTP_PORT = 1085;
-	private static final String TO_CHANGE = "<path>/<your_bigfile.ext>";
 	private static final int BUFFER_SIZE = 32768;
-		
-	// Set the full path name of the big file to use for the test.
-	private static final String BIGFILE_PATH = "C:/Program Files/VideoLAN/VLC/avcodec-51.dll";
+	private static final String BIGFILE_PATH = System.getProperty("java.home").replace("\\","/")+"/lib/rt.jar";
 	
 	private Wiser server;
 	
@@ -78,11 +75,6 @@ public class BigAttachmentTest extends TestCase
 	
 	public void testAttachments() throws Exception
 	{	
-		if (BIGFILE_PATH.equals(TO_CHANGE))
-		{
-			LOG.error("BigAttachmentTest: To complete this test you must change the BIGFILE_PATH var to point out a file on your disk !");
-		}
-		assertNotSame("BigAttachmentTest: To complete this test you must change the BIGFILE_PATH var to point out a file on your disk !", TO_CHANGE, BIGFILE_PATH);
 		Properties props = System.getProperties();
 		props.setProperty("mail.smtp.host", "localhost");
 		props.setProperty("mail.smtp.port", SMTP_PORT+"");
