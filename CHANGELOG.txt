@@ -1,6 +1,6 @@
 #####
 2013-07-25
-Deprecated CHANGELOG file as functionnality is provided by GitHub
+Deprecated CHANGELOG file as functionality is provided by GitHub
 website from now on.
 
 #####
@@ -17,7 +17,7 @@ Version 1.0.0-M2 (2009-02-10) - Codename A new dawn
 - Removed the getHelp(..) method from the Command interface.
 - Command objects now have a direct reference to their
   CommandHandler.
-- Reworked starp/stop methods and added a shutdown method to the 
+- Reworked start/stop methods and added a shutdown method to the 
   SMTPServer class thus allowing to restart multiple times the same 
   instance until shutdown is called.
 - Removed the acceptor thread pool which is not used since the 
@@ -44,7 +44,7 @@ Version 1.0.0-M1 (2009-01-19) - Codename The 5th of November
 
 - Migrated to MINA 2.0.0-M4 (was previously using a 1.1.x version)
 - Big code refactoring to make code easy to understand.
-- Added junit tests for the new funtionnalities.
+- Added junit tests for the new functionalities.
 - Removed some unnecessary classes and interfaces that
   only add complexity to the code.
 - API cleaning by renaming classes to reflect their real use.
@@ -71,5 +71,5 @@ Version 1.0.0-M1 (2009-01-19) - Codename The 5th of November
 - Fixed AuthenticationHandler and LoginValidator interface which raised an 
   incorrect exception.
 - Fixed a rare threading issue allowing a re authentication immediately
-  after a successfull authentication.
+  after a successful authentication.
 - Fixed bad commands handling and error codes messages.
