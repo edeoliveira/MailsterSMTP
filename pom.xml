@@ -160,11 +160,5 @@
         </profile>
     </profiles>
 
-    <distributionManagement>
-        <repository>
-            <id>mvn-repo</id>
-            <url>file://${project.basedir}/maven-repo/</url>
-        </repository>
-    </distributionManagement>
 </project>
 

@@ -8,12 +8,12 @@ See project page at http://edeoliveira.github.com/MailsterSMTP/
 ## Maven repository
 
 ```xml
- <repositories>
-        <repository>
-            <id>smtp-maven-repo</id>
-            <url>https://raw.githubusercontent.com/bonashen/MailsterSMTP/tree/master/maven-repo</url>
-        </repository>
-  </repositories>
+<repositories>
+       <repository>
+           <id>github-maven-repo</id>
+           <url>https://raw.githubusercontent.com/bonashen/mvn-repo/tree/master/</url>
+       </repository>
+ </repositories>
 ```
 ## Dependency
 
