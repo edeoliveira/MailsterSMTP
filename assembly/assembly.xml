@@ -11,7 +11,6 @@
             <outputDirectory>/</outputDirectory>
             <directory>target/classes</directory>
         </fileSet>
-
         <fileSet>
             <outputDirectory>/META-INF</outputDirectory>
             <directory>/</directory>
@@ -19,6 +18,7 @@
                 <include>*.txt</include>
             </includes>
         </fileSet>
+		
         <!--for maven information-->
         <fileSet>
             <outputDirectory>/META-INF/org.mailster.smtp-core</outputDirectory>
@@ -33,20 +33,7 @@
             <includes>
                 <include>*</include>
             </includes>
-
         </fileSet>
-        <!--package test-->
-        <!--<fileSet>-->
-            <!--<outputDirectory>/</outputDirectory>-->
-            <!--<directory>target/test-classes</directory>-->
-            <!--<excludes>-->
-                <!--<exclude>-->
-                    <!--log4j.properties-->
-                <!--</exclude>-->
-            <!--</excludes>-->
-        <!--</fileSet>-->
-
-
     </fileSets>
 
 </assembly>

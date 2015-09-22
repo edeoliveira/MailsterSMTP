@@ -25,21 +25,26 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+	<groupId>org.mailster</groupId>
     <artifactId>smtp-core</artifactId>
-    <groupId>org.mailster</groupId>
-    <version>1.0.0-M3</version>
+    <version>1.0.0-RC1</version>
     <name>Mailster SMTP Core</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <project.local.lib>${project.basedir}/lib</project.local.lib>
+    </properties>
+
     <dependencies>
 
-        <!-- mina core-->
+        <!-- mina core -->
         <dependency>
             <groupId>org.apache.mina</groupId>
             <artifactId>mina-core</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.7</version>
         </dependency>
 
+		<!-- mail -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
@@ -52,23 +57,39 @@
             <version>1.1.1</version>
         </dependency>
 
-        <!-- for log-->
+        <!-- log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.12</version>
         </dependency>
-        <dependency>
+        
+		<dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.12</version>
         </dependency>
+		
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+		
+		<!-- tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>		
 
+		<dependency>
+			<groupId>org.columba</groupId>
+			<artifactId>ristretto</artifactId>
+			<version>1.0-all</version>
+			<scope>test</scope>
+        </dependency>		
     </dependencies>
 
     <build>
@@ -84,37 +105,38 @@
                     </include>
                 </includes>
             </testResource>
-
         </testResources>
 
         <plugins>
-
-            <!-- 设置源文件编码方式-->
+            <!-- Set source file encoding -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>UTF-8</encoding>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>				
                 </configuration>
             </plugin>
-            <!-- 解决资源文件的编码问题 -->
+            
+			<!-- Fix resources files encoding  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
-
+			
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <!--<version>2.3</version>-->
+                <version>2.5.5</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
+					<classifier>bin</classifier>
                     <descriptor>assembly/assembly.xml</descriptor>
                 </configuration>
                 <executions>
@@ -128,37 +150,35 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 
-    <properties>
-        <project.local.lib>${project.basedir}/lib</project.local.lib>
-    </properties>
-
-
     <profiles>
-        <profile>
-            <id>test</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.columba</groupId>
-                    <artifactId>ristretto</artifactId>
-                    <version>1.0</version>
-                    <scope>system</scope>
-                    <!--本地jar的路径,相对或者绝对都可以-->
-                    <systemPath>${project.local.lib}/ristretto-1.0-all.jar</systemPath>
-                </dependency>
-
-                <!-- junit for test-->
-                <dependency>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                    <version>4.11</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
+		<profile>
+			<repositories>
+				<repository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>bintray-edeoliveira-maven</id>
+					<name>bintray</name>
+					<url>http://dl.bintray.com/edeoliveira/maven</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<id>bintray-edeoliveira-maven</id>
+					<name>bintray-plugins</name>
+					<url>http://dl.bintray.com/edeoliveira/maven</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<id>bintray</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 </project>
 
