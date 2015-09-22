@@ -124,11 +124,21 @@ public class BigAttachmentTest extends TestCase
 		FileOutputStream fos = new FileOutputStream(compareFile);
 		((MimeMultipart) msg.getMimeMessage().getContent()).getBodyPart(1).getDataHandler().writeTo(fos);
 		fos.close();
-		LOG.debug("Checking integrity ...");
-		assertTrue(checkIntegrity(new File(BIGFILE_PATH), compareFile));
-		LOG.debug("Checking integrity DONE");
-		compareFile.delete();
-		msg.dispose();
+		try 
+		{
+			LOG.debug("Checking integrity ...");
+			assertTrue(checkIntegrity(new File(BIGFILE_PATH), compareFile));
+			LOG.debug("Checking integrity DONE");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			compareFile.deleteOnExit();
+			msg.dispose();
+		}
 	}
 	
 	private boolean checkIntegrity(File src, File dest) throws IOException, NoSuchAlgorithmException

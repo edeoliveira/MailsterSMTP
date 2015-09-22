@@ -142,9 +142,11 @@ public class WiserFailuresTest extends TestCase
 	public void testSendMessageWithCarriageReturn() throws IOException, MessagingException
 	{
 		String bodyWithCR = "\r\n\r\nKeep these\r\npesky\r\n\r\ncarriage returns\r\n";
+
 		try
 		{
-			sendMessage(SMTP_PORT, "sender@hereagain.com", "CRTest", bodyWithCR, "receivingagain@there.com");
+			sendMessage(SMTP_PORT, "sender@hereagain.com", 
+					"CRTest", bodyWithCR, "receivingagain@there.com");
 		}
 		catch (Exception e)
 		{
@@ -155,7 +157,11 @@ public class WiserFailuresTest extends TestCase
 		assertEquals(1, server.getMessages().size());
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
 		WiserMessage email = emailIter.next();
-		assertEquals(email.getMimeMessage().getContent().toString(), bodyWithCR);
+		String received = email.getMimeMessage().getContent().toString();
+		
+		// last \r\n will be treated as part of the data termination by javamail 
+		// Transport ... so we compare the body without the last 2 chars
+		assertEquals(bodyWithCR.substring(0, bodyWithCR.length()-2), received);
 	}
 
 	public void testListenersAndContextAttributes()
@@ -264,7 +270,7 @@ public class WiserFailuresTest extends TestCase
 			msg.setSubject(Subject);
 
 			msg.setText(body);
-			msg.setHeader("X-Mailer", "musala");
+			msg.setHeader("X-Mailer", "here");
 			msg.setSentDate(new Date());
 
 			Transport transport = null;
@@ -276,7 +282,7 @@ public class WiserFailuresTest extends TestCase
 				assertEquals(0, server.getMessages().size());
 				transport.sendMessage(msg, InternetAddress.parse(To, false));
 				assertEquals(1, server.getMessages().size());
-				transport.sendMessage(msg, InternetAddress.parse("dimiter.bakardjiev@musala.com", false));
+				transport.sendMessage(msg, InternetAddress.parse("receivingagain@there.com", false));
 				assertEquals(2, server.getMessages().size());
 			}
 			catch (javax.mail.MessagingException me)
@@ -301,8 +307,8 @@ public class WiserFailuresTest extends TestCase
 		Iterator<WiserMessage> emailIter = server.getMessages().iterator();
 		WiserMessage email = emailIter.next();
 		MimeMessage mime = email.getMimeMessage();
-		assertTrue(mime.getHeader("Subject")[0].equals("Test"));
-		assertTrue(mime.getContent().toString().equals("Test Body"));
+		assertEquals("Test", mime.getHeader("Subject")[0]);
+		assertEquals("Test Body", mime.getContent().toString());
 	}
 
 	private Properties getMailProperties(int port)
