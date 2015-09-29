@@ -1,5 +1,5 @@
 # IDEA files      #
 ###################
 .idea/
-*.iml
 bin/
+target/
