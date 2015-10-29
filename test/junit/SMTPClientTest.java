@@ -224,6 +224,17 @@ public class SMTPClientTest extends TestCase
 			get(0).getMimeMessage().getContent().toString();
 		assertEquals(body, received);
 	}
+
+	public void testPreservingCRLFHeavily() throws Exception 
+  	{	
+		String body = "\r\n\r\nKeep these\r\npesky\r\n\r\ncarriage returns\r\n";
+		testCRLFEncodingMessage(body, "ISO-8859-1");
+	
+		Thread.sleep(500);
+		String received = this.wiser.getMessages().
+			get(0).getMimeMessage().getContent().toString();
+		assertEquals(body, received);
+	}
 	
 	/** */
 	public void testBinaryEightBitMessage() throws Exception

@@ -38,7 +38,6 @@ public class AuthTest extends ServerTestCase
 
 	protected void setUp() throws Exception
 	{
-		super.setUp();
 		this.wiser = new TestWiser();
 		this.wiser.setHostname("localhost");
 		this.wiser.setPort(PORT);
@@ -47,11 +46,6 @@ public class AuthTest extends ServerTestCase
 		
 		this.wiser.start();
 		this.c = new Client("localhost", PORT);
-	}
-
-	protected void tearDown() throws Exception
-	{
-		super.tearDown();
 	}
 
 	/**
