@@ -87,6 +87,13 @@ public class BigAttachmentTest extends TestCase
 		
 		// Attach the file
 		MimeBodyPart bp2 = new MimeBodyPart();
+
+		// Can't test if file not found
+		if (!(new File(BIGFILE_PATH)).exists()) {
+			LOG.error("Couldn't find the test big file :"+BIGFILE_PATH);
+			return;
+		}
+
 		FileDataSource fileAttachment = new FileDataSource(BIGFILE_PATH);
 		DataHandler dh = new DataHandler(fileAttachment);
 		bp2.setDataHandler(dh);
