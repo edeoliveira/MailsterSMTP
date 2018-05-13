@@ -65,7 +65,7 @@ public class MailTest extends ServerTestCase
 		expect("250");
 
 		send("MAIL FROM: <>");
-		expect("250");
+		expect("553 <> Invalid email address");
 	}
 
 	public void testEmptyEmailFromCommand() throws Exception

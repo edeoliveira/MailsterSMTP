@@ -69,4 +69,17 @@ public class ReceiptTest extends ServerTestCase
 		expect("250 Ok");
 	}
 
+	public void testReceiptEmptyAddress() throws Exception
+	{
+		expect("220");
+
+		send("HELO foo.com");
+		expect("250");
+
+		send("MAIL FROM: success@example.org");
+		expect("250 Ok");
+
+		send("RCPT TO:");
+		expect("553 <> Invalid email address");
+	}
 }

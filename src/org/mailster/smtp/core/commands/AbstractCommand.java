@@ -8,9 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import java.util.regex.Pattern;
 
 import org.apache.mina.core.session.IoSession;
 import org.mailster.smtp.core.SMTPConnectionHandler;
@@ -25,6 +23,9 @@ import org.mailster.smtp.core.SMTPConnectionHandler;
  */
 abstract public class AbstractCommand implements Command
 {
+	private static final String VALIDATE_EMAIL = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(localhost|(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$)";
+	private static final Pattern EMAIL_PATTERN = Pattern.compile(VALIDATE_EMAIL);
+
 	private String name;
 	private CommandHandler handler;
 	private static Map<String, HelpMessage> helpMessageMap = new HashMap<String, HelpMessage>();
@@ -93,19 +94,10 @@ abstract public class AbstractCommand implements Command
 	
 	protected boolean isValidEmailAddress(String address)
 	{
-		// MAIL FROM: <>
 		if (address.length() == 0)
-			return true;
-
-		try
-		{
-			InternetAddress[] ia = InternetAddress.parse(address, true);
-			return (ia.length != 0);
-		}
-		catch (AddressException ae)
-		{
 			return false;
-		}
+
+		return EMAIL_PATTERN.matcher(address).matches();
 	}
 	
 	protected static void getTokenizedString(StringBuilder sb, Collection<String> items, String delim)

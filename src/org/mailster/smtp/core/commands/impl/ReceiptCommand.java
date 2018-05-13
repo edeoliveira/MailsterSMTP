@@ -10,7 +10,7 @@ import org.mailster.smtp.core.commands.AbstractCommand;
 
 /**
  * The RCPT command implementation.
- * 
+ *
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;
  * @author Ian McFarland &lt;ian@neo.com&gt;
  * @author Jon Stevens
@@ -21,11 +21,11 @@ public class ReceiptCommand extends AbstractCommand
 	public ReceiptCommand()
 	{
 		super("RCPT", "The RCPT command specifies the recipient. This command can be used\n" +
-				"any number of times to specify multiple recipients.", 
+				"any number of times to specify multiple recipients.",
 				"TO: <recipient>\n recipient = the email address of the recipient of the message");
 	}
 
-	public void execute(String commandString, IoSession ioSession, SMTPContext ctx) 
+	public void execute(String commandString, IoSession ioSession, SMTPContext ctx)
 		throws IOException
 	{
 		SMTPState smtpState = ctx.getSMTPState();
@@ -34,7 +34,7 @@ public class ReceiptCommand extends AbstractCommand
 			sendResponse(ioSession, "503 Error: need MAIL command");
 			return;
 		}
-		
+
 		int max = ctx.getSMTPServerConfig().getMaxRecipients();
 		if (max > -1 && smtpState.getRecipientCount() >= max)
 		{
@@ -46,20 +46,27 @@ public class ReceiptCommand extends AbstractCommand
 		if (args.toUpperCase().startsWith("TO:"))
 		{
 			String recipientAddress = extractEmailAddress(args, 3);
-			try
+			if (isValidEmailAddress(recipientAddress))
 			{
-				ctx.getDeliveryHandler().recipient(recipientAddress);
-				smtpState.addRecipient();
-				sendResponse(ioSession, "250 Ok");
+				try
+				{
+					ctx.getDeliveryHandler().recipient(recipientAddress);
+					smtpState.addRecipient();
+					sendResponse(ioSession, "250 Ok");
+				}
+				catch (RejectException ex)
+				{
+					sendResponse(ioSession, ex.getMessage());
+				}
 			}
-			catch (RejectException ex)
+			else
 			{
-				sendResponse(ioSession, ex.getMessage());
+				sendResponse(ioSession, "553 <" + recipientAddress + "> Invalid email address");
 			}
 		}
-        else
-        {
-            sendResponse(ioSession, "501 Syntax: RCPT TO: <address> Error in parameters: \"" + args + "\"");
-        }
+    else
+    {
+      sendResponse(ioSession, "501 Syntax: RCPT TO: <address> Error in parameters: \"" + args + "\"");
+    }
 	}
 }

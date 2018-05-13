@@ -57,7 +57,13 @@
             <version>1.5.0-b01</version>
         </dependency>
 
-		<!-- test dependencies -->		
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
+        <!-- test dependencies -->
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
