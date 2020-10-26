@@ -15,21 +15,13 @@ This is notably used by the Mailster project (https://github.com/edeoliveira/Mai
 		<url>http://dl.bintray.com/edeoliveira/maven</url>
 	</repository>	   
 </repositories>
- 
-<pluginRepositories>
-	<pluginRepository>
-		<id>bintray-edeoliveira-maven</id>
-		<name>bintray-plugins</name>
-		<url>http://dl.bintray.com/edeoliveira/maven</url>
-	</pluginRepository>
-</pluginRepositories> 
 ```
 ## Dependency
 
 ```xml
    <dependency>
         <groupId>org.mailster</groupId>
-		<artifactId>smtp-core</artifactId>        
-        <version>1.0.0-RC1</version>
+        <artifactId>smtp-core</artifactId>        
+        <version>1.0.0</version>
     </dependency>
 ```

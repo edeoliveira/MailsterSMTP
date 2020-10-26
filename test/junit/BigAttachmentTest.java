@@ -1,36 +1,22 @@
 package junit;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
+import junit.framework.TestCase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import wiser.Wiser;
+import wiser.WiserMessage;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.URLName;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
-import junit.framework.TestCase;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import wiser.Wiser;
-import wiser.WiserMessage;
-
-import com.sun.mail.smtp.SMTPTransport;
+import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 /**
  * This class tests the transfer speed of emails that carry 
@@ -110,12 +96,11 @@ public class BigAttachmentTest extends TestCase
 		baseMsg.setContent(multipart);
         baseMsg.saveChanges();
         
-        LOG.debug("Send started");        
-        Transport t = new SMTPTransport(session, new URLName("smtp://localhost:"+SMTP_PORT));
+        LOG.debug("Send started");
+		Transport t = session.getTransport(new URLName("smtp://localhost:" + SMTP_PORT));
 		long started = System.currentTimeMillis();
         t.connect();
-        t.sendMessage(baseMsg, new Address[] {new InternetAddress(
-				"success@example.org")});
+        t.sendMessage(baseMsg, new Address[] {new InternetAddress("success@example.org")});
         t.close();
         started = System.currentTimeMillis() - started;
         LOG.info("Elapsed ms = "+started);
