@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * the following code line :
  * 
  * server.getDeliveryHandlerFactory().
- *  setDeliveryHandlerImplClass(Class<? extends AbstractDeliveryHandler> impl);
+ *  setDeliveryHandlerImplClass(Class&lt;? extends AbstractDeliveryHandler&gt; impl);
  * 
  * You can always add, remove listeners by using the provided
  * methods of the {@link DeliveryHandlerFactory}.

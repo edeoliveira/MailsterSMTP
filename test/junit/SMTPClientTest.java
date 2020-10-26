@@ -1,13 +1,12 @@
 package junit;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.Random;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import org.columba.ristretto.message.Address;
+import org.columba.ristretto.smtp.SMTPException;
+import org.columba.ristretto.smtp.SMTPProtocol;
+import wiser.Wiser;
 
 import javax.activation.DataHandler;
 import javax.mail.Message;
@@ -16,18 +15,15 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.util.Properties;
+import java.util.Random;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.columba.ristretto.message.Address;
-import org.columba.ristretto.smtp.SMTPException;
-import org.columba.ristretto.smtp.SMTPProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import wiser.Wiser;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * This class serves as a test case for both Wiser (since it is used
@@ -42,22 +38,14 @@ import wiser.Wiser;
  */
 public class SMTPClientTest extends TestCase
 {
-	/** */
-	@SuppressWarnings("unused")
-	private static final Logger LOG = LoggerFactory.getLogger(SMTPClientTest.class);
-	
-	/** */
 	public static final int PORT = 2566;
 
-	/** */
 	protected Wiser wiser;
 	protected Session session;
 	private Random rnd;
 	
-	/** */
 	public SMTPClientTest(String name) { super(name); }
 	
-	/** */
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -74,7 +62,6 @@ public class SMTPClientTest extends TestCase
 		rnd = new Random();
 	}
 	
-	/** */
 	protected void tearDown() throws Exception
 	{
 		this.wiser.stop();
@@ -85,7 +72,6 @@ public class SMTPClientTest extends TestCase
 		super.tearDown();
 	}
 	
-	/** */
 	public void testMultipleRecipients() throws Exception
 	{
 		MimeMessage message = new MimeMessage(this.session);
@@ -100,7 +86,6 @@ public class SMTPClientTest extends TestCase
 		assertEquals(2, this.wiser.getMessages().size());
 	}
 
-	/** */
 	public void testLargeMessage() throws Exception
 	{
 		MimeMessage message = new MimeMessage(this.session);
@@ -117,9 +102,7 @@ public class SMTPClientTest extends TestCase
 		assertEquals("barf", this.wiser.getMessages().get(0).getMimeMessage().getSubject());
 		assertEquals("barf", this.wiser.getMessages().get(1).getMimeMessage().getSubject());
 	}
-	
 
-	/** */
 	public void testUtf8EightBitMessage() throws Exception
 	{
 		// Beware editor/compiler character encoding issues; safest to put unicode escapes here
@@ -130,7 +113,6 @@ public class SMTPClientTest extends TestCase
 		assertEquals(body, this.wiser.getMessages().get(0).getMimeMessage().getContent());
 	}
 
-	/** */
 	public void testUtf16EightBitMessage() throws Exception
 	{
 		String body = "\u3042\u3044\u3046\u3048\u304a";
@@ -139,7 +121,6 @@ public class SMTPClientTest extends TestCase
 		assertEquals(body, this.wiser.getMessages().get(0).getMimeMessage().getContent());
 	}
 	
-	/** */
 	public void testIso88591EightBitMessage() throws Exception
 	{
 		// Beware editor/compiler character encoding issues; safest to put unicode escapes here
@@ -150,7 +131,6 @@ public class SMTPClientTest extends TestCase
 		assertEquals(body, this.wiser.getMessages().get(0).getMimeMessage().getContent());
 	}
 
-	/** */
 	public void testIso885915EightBitMessage() throws Exception
 	{
 		// Beware editor/compiler character encoding issues; safest to put unicode escapes here
@@ -161,7 +141,6 @@ public class SMTPClientTest extends TestCase
 		assertEquals(body, this.wiser.getMessages().get(0).getMimeMessage().getContent());
 	}
 
-	/** */
 	private void testEightBitMessage(String body, String charset) throws Exception
 	{
 		MimeMessage message = new MimeMessage(this.session);
@@ -174,7 +153,6 @@ public class SMTPClientTest extends TestCase
 		Transport.send(message);
 	}
 
-	/** */
 	private void testCRLFEncodingMessage(String body, String charset) throws Exception
 	{
 		Address from = new Address("someone@somewhereelse.com");
@@ -260,8 +238,8 @@ public class SMTPClientTest extends TestCase
 			tmp.write(buf, 0, n);
 		}
 		in.close();
-		
-		assertTrue(Arrays.equals(body, tmp.toByteArray()));
+
+		assertArrayEquals(body, tmp.toByteArray());
 	}
 	
 	/** */

@@ -58,19 +58,18 @@ import javax.mail.internet.SharedInputStream;
  * A <code>RandomAccessFile</code> object is used to
  * access the file data. <p>
  *
- * @author  Bill Shannon
- * @since   JavaMail 1.4
+ * @author Bill Shannon
+ * @since JavaMail 1.4
  */
 
 /**
  * This class has been modified to ensure that the temporary 
  * underlying file is deleted when last reference is gone or 
  * when JVM exits normally.
- * 
+ *
  * @author De Oliveira Edouard &lt;doe_wanted@yahoo.fr&gt;
  */
-public class SharedTmpFileInputStream extends BufferedInputStream
-        implements SharedInputStream {
+public class SharedTmpFileInputStream extends BufferedInputStream implements SharedInputStream {
 
     private static int defaultBufferSize = 2048;
 
@@ -102,12 +101,6 @@ public class SharedTmpFileInputStream extends BufferedInputStream
     protected long datalen;
 
     /**
-     * True if this is a top level stream created directly by "new".
-     * False if this is a derived stream created by newStream.
-     */
-    //private boolean master = true;
-
-    /**
      * A shared class that keeps track of the references
      * to a particular file so it can be closed when the
      * last reference is gone.
@@ -122,13 +115,13 @@ public class SharedTmpFileInputStream extends BufferedInputStream
         }
 
         SharedFile(File file) throws IOException {
-            this .sharedFile = file;
-            
+            this.sharedFile = file;
+
             // Always mark file to be deleted on exit in case streams
             // are not closed properly.
-            this .sharedFile.deleteOnExit();
-            
-            this .in = new RandomAccessFile(file, "r");            
+            this.sharedFile.deleteOnExit();
+
+            this.in = new RandomAccessFile(file, "r");
         }
 
         public RandomAccessFile open() {
@@ -154,13 +147,13 @@ public class SharedTmpFileInputStream extends BufferedInputStream
                 // should already be closed, ignore exception
                 try {
                     in.close();
-                } catch (IOException ioex) {
+                } catch (IOException ignored) {
                 }
             }
         }
 
         protected void finalize() throws Throwable {
-            super .finalize();
+            super.finalize();
             in.close();
         }
     }
@@ -182,7 +175,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * @param   file   the file
      */
     public SharedTmpFileInputStream(File file) throws IOException {
-        this (file, defaultBufferSize);
+        this(file, defaultBufferSize);
     }
 
     /**
@@ -192,7 +185,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * @param   file   the file
      */
     public SharedTmpFileInputStream(String file) throws IOException {
-        this (file, defaultBufferSize);
+        this(file, defaultBufferSize);
     }
 
     /**
@@ -201,11 +194,11 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      *
      * @param   file    the file
      * @param   size   the buffer size.
-     * @exception IllegalArgumentException if size <= 0.
+     * @exception IllegalArgumentException if size &lt;= 0.
      */
     public SharedTmpFileInputStream(File file, int size)
             throws IOException {
-        super (null); // XXX - will it NPE?
+        super(null); // XXX - will it NPE?
         if (size <= 0)
             throw new IllegalArgumentException("Buffer size <= 0");
         init(new SharedFile(file), size);
@@ -217,38 +210,36 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      *
      * @param   file    the file
      * @param   size   the buffer size.
-     * @exception IllegalArgumentException if size <= 0.
+     * @exception IllegalArgumentException if size &lt;= 0.
      */
     public SharedTmpFileInputStream(String file, int size)
             throws IOException {
-        super (null); // XXX - will it NPE?
+        super(null); // XXX - will it NPE?
         if (size <= 0)
             throw new IllegalArgumentException("Buffer size <= 0");
         init(new SharedFile(file), size);
     }
 
     private void init(SharedFile sf, int size) throws IOException {
-        this .sf = sf;
-        this .in = sf.open();
-        this .start = 0;
-        this .datalen = in.length(); // XXX - file can't grow
-        this .bufsize = size;
+        this.sf = sf;
+        this.in = sf.open();
+        this.start = 0;
+        this.datalen = in.length(); // XXX - file can't grow
+        this.bufsize = size;
         buf = new byte[size];
     }
 
     /**
      * Used internally by the <code>newStream</code> method.
      */
-    private SharedTmpFileInputStream(SharedFile sf, long start, long len,
-            int bufsize) {
-        super (null);
-        //this .master = false;
-        this .sf = sf;
-        this .in = sf.open();
-        this .start = start;
-        this .bufpos = start;
-        this .datalen = len;
-        this .bufsize = bufsize;
+    private SharedTmpFileInputStream(SharedFile sf, long start, long len, int bufsize) {
+        super(null);
+        this.sf = sf;
+        this.in = sf.open();
+        this.start = start;
+        this.bufpos = start;
+        this.datalen = len;
+        this.bufsize = bufsize;
         buf = new byte[bufsize];
     }
 
@@ -278,7 +269,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
                 int nsz = pos * 2;
                 if (nsz > marklimit)
                     nsz = marklimit;
-                byte nbuf[] = new byte[nsz];
+                byte[] nbuf = new byte[nsz];
                 System.arraycopy(buf, 0, nbuf, 0, pos);
                 buf = nbuf;
             }
@@ -297,9 +288,9 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * See the general contract of the <code>read</code>
      * method of <code>InputStream</code>.
      *
-     * @return     the next byte of data, or <code>-1</code> if the end of the
+     * @return the next byte of data, or <code>-1</code> if the end of the
      *             stream is reached.
-     * @exception  IOException  if an I/O error occurs.
+     * @exception IOException  if an I/O error occurs.
      */
     public synchronized int read() throws IOException {
         ensureOpen();
@@ -333,7 +324,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
             if (avail <= 0)
                 return -1;
         }
-        int cnt = (avail < len) ? avail : len;
+        int cnt = Math.min(avail, len);
         System.arraycopy(buf, pos, b, off, cnt);
         pos += cnt;
         return cnt;
@@ -350,12 +341,11 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * @param      b     destination buffer.
      * @param      off   offset at which to start storing bytes.
      * @param      len   maximum number of bytes to read.
-     * @return     the number of bytes read, or <code>-1</code> if the end of
+     * @return the number of bytes read, or <code>-1</code> if the end of
      *             the stream has been reached.
-     * @exception  IOException  if an I/O error occurs.
+     * @exception IOException  if an I/O error occurs.
      */
-    public synchronized int read(byte b[], int off, int len)
-            throws IOException {
+    public synchronized int read(byte[] b, int off, int len) throws IOException {
         ensureOpen();
         if ((off | len | (off + len) | (b.length - (off + len))) < 0) {
             throw new IndexOutOfBoundsException();
@@ -380,8 +370,8 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * method of <code>InputStream</code>.
      *
      * @param      n   the number of bytes to be skipped.
-     * @return     the actual number of bytes skipped.
-     * @exception  IOException  if an I/O error occurs.
+     * @return the actual number of bytes skipped.
+     * @exception IOException  if an I/O error occurs.
      */
     public synchronized long skip(long n) throws IOException {
         ensureOpen();
@@ -404,7 +394,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
                 return 0;
         }
 
-        long skipped = (avail < n) ? avail : n;
+        long skipped = Math.min(avail, n);
         pos += skipped;
         return skipped;
     }
@@ -413,21 +403,21 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * Returns the number of bytes that can be read from this input 
      * stream without blocking. 
      *
-     * @return     the number of bytes that can be read from this input
+     * @return the number of bytes that can be read from this input
      *             stream without blocking.
-     * @exception  IOException  if an I/O error occurs.
+     * @exception IOException  if an I/O error occurs.
      */
     public synchronized int available() throws IOException {
         ensureOpen();
         return (count - pos) + in_available();
     }
 
-    private int in_available() throws IOException {
+    private int in_available() {
         // XXX - overflow
         return (int) ((start + datalen) - (bufpos + count));
     }
 
-    /** 
+    /**
      * See the general contract of the <code>mark</code>
      * method of <code>InputStream</code>.
      *
@@ -450,7 +440,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * is thrown. Otherwise, <code>pos</code> is
      * set equal to <code>markpos</code>.
      *
-     * @exception  IOException  if this stream has not been marked or
+     * @exception IOException  if this stream has not been marked or
      *               if the mark has been invalidated.
      * @see        #mark(int)
      */
@@ -467,7 +457,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * method of <code>SharedFileInputStream</code> returns 
      * <code>true</code>. 
      *
-     * @return  a <code>boolean</code> indicating if this stream type supports
+     * @return a <code>boolean</code> indicating if this stream type supports
      *          the <code>mark</code> and <code>reset</code> methods.
      * @see     java.io.InputStream#mark(int)
      * @see     java.io.InputStream#reset()
@@ -480,16 +470,13 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * Closes this input stream and releases any system resources 
      * associated with the stream. 
      *
-     * @exception  IOException  if an I/O error occurs.
+     * @exception IOException  if an I/O error occurs.
      */
     public void close() throws IOException {
         if (in == null)
             return;
         try {
-            /*if (master)
-                sf.forceClose();
-            else*/
-                sf.close();
+            sf.close();
         } finally {
             sf = null;
             in = null;
@@ -501,10 +488,9 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      * Return the current position in the InputStream, as an
      * offset from the beginning of the InputStream.
      *
-     * @return  the current position
+     * @return the current position
      */
     public long getPosition() {
-        //System.out.println("getPosition: start " + start + " pos " + pos + " bufpos " + bufpos + " = " + (bufpos + pos - start));
         if (in == null)
             throw new RuntimeException("Stream closed");
         return bufpos + pos - start;
@@ -520,7 +506,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
      *
      * @param   start   the starting position
      * @param   end     the ending position + 1
-     * @return          the new stream
+     * @return the new stream
      */
     public InputStream newStream(long start, long end) {
         if (in == null)
@@ -529,7 +515,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream
             throw new IllegalArgumentException("start < 0");
         if (end == -1)
             end = datalen;
-        return new SharedTmpFileInputStream(sf, this .start + (int) start,
+        return new SharedTmpFileInputStream(sf, this.start + (int) start,
                 (int) (end - start), bufsize);
     }
 
