@@ -227,7 +227,7 @@ public class SMTPServer
 	/**
 	 * Shut things down gracefully. Please pay attention to the fact 
 	 * that a shutdown implies that the server would fail to restart 
-	 * because som internal resources have been freed.
+	 * because some internal resources have been freed.
 	 * 
 	 * You can directly call shutdown() if you do not intend to restart 
 	 * it later. Calling start() after shutdown() will throw a 

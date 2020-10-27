@@ -3,6 +3,7 @@ package org.mailster.smtp;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * This class holds the configuration options of the
@@ -31,7 +32,7 @@ public class SMTPServerConfig
 	/**
 	 * The default charset is ISO-8859-1.
 	 */
-	public static final Charset DEFAULT_CHARSET = Charset.forName("ISO-8859-1");
+	public static final Charset DEFAULT_CHARSET = StandardCharsets.ISO_8859_1;
 
 	/**
 	 * The charset in use. Defaults to DEFAULT_CHARSET.
@@ -76,7 +77,6 @@ public class SMTPServerConfig
 	 */
 	private int dataDeferredSize = DEFAULT_DATA_DEFERRED_SIZE;
 
-	
 	/** 
 	 * Set a hard limit on the maximum number of connections this server will accept 
 	 * once we reach this limit, the server will gracefully reject new connections.

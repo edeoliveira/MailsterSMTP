@@ -13,14 +13,11 @@ import org.mailster.smtp.SMTPServer;
  */
 public class StartStopTest extends TestCase 
 {
-    /** */
     public static final int PORT = 6666;
 
-    /** */
     protected int counter = 0;
 
-    /** */
-    public StartStopTest(String name) 
+    public StartStopTest(String name)
     {
         super(name);
     }

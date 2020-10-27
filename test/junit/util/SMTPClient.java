@@ -2,6 +2,7 @@ package junit.util;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 
 
@@ -40,7 +41,7 @@ public class SMTPClient
 
 		connector.getFilterChain().addLast("threadPool", new ExecutorFilter(Executors.newFixedThreadPool(MAX_THREADS)));
 		connector.getFilterChain().addLast("codec",
-											new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));
+											new ProtocolCodecFilter(new TextLineCodecFactory(StandardCharsets.UTF_8)));
 		connector.getFilterChain().addLast("logger", new LoggingFilter());
 
 		SMTPSessionHandler handler = new SMTPSessionHandler("localhost");
