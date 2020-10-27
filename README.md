@@ -1,4 +1,4 @@
-MailsterSMTP
+MailsterSMTP [ ![Download](https://api.bintray.com/packages/edeoliveira/maven/MailsterSMTP/images/download.svg?version=1.0.0) ](https://bintray.com/edeoliveira/maven/MailsterSMTP/1.0.0/link)
 ============
 
 A NIO SMTP server API written in Java
