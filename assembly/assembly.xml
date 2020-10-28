@@ -8,12 +8,12 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory/>
             <directory>target/classes</directory>
         </fileSet>
         <fileSet>
             <outputDirectory>/META-INF</outputDirectory>
-            <directory>/</directory>
+            <directory>${project.basedir}</directory>
             <includes>
                 <include>*.txt</include>
             </includes>
@@ -22,7 +22,7 @@
         <!--for maven information-->
         <fileSet>
             <outputDirectory>/META-INF/org.mailster.smtp-core</outputDirectory>
-            <directory>/</directory>
+            <directory>${project.basedir}</directory>
             <includes>
                 <include>pom.xml</include>
             </includes>
