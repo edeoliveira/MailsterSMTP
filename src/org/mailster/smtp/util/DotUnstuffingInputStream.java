@@ -66,8 +66,8 @@ public class DotUnstuffingInputStream extends FilterInputStream {
             throw new NullPointerException();
         } else if (len == 0) {
             return 0;
-	} else if ((off < 0) || (off > b.length) || (len < 0) ||
-               ((off + len) > b.length) || ((off + len) < 0)) {
+        } else if ((off < 0) || (off >= b.length) || (len < 0) ||
+                ((off + len) > b.length) || ((off + len) < 0)) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -75,16 +75,16 @@ public class DotUnstuffingInputStream extends FilterInputStream {
         if (c == -1) {
             return -1;
         }
-        b[off] = (byte)c;
+        b[off] = (byte) c;
 
         int i = 1;
 
-        for (; i < len ; i++) {
+        for (; i < len; i++) {
             c = read();
             if (c == -1) {
                 break;
             }
-            b[off + i] = (byte)c;
+            b[off + i] = (byte) c;
         }
 
         return i;

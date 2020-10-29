@@ -60,9 +60,7 @@ import javax.mail.internet.SharedInputStream;
  *
  * @author Bill Shannon
  * @since JavaMail 1.4
- */
-
-/**
+ *
  * This class has been modified to ensure that the temporary 
  * underlying file is deleted when last reference is gone or 
  * when JVM exits normally.
@@ -71,7 +69,7 @@ import javax.mail.internet.SharedInputStream;
  */
 public class SharedTmpFileInputStream extends BufferedInputStream implements SharedInputStream {
 
-    private static int defaultBufferSize = 2048;
+    private static final int DEFAULT_BUFFER_SIZE = 2048;
 
     /**
      * The file containing the data.
@@ -107,8 +105,8 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
      */
     static class SharedFile {
         private int cnt;
-        private RandomAccessFile in;
-        private File sharedFile;
+        private final RandomAccessFile in;
+        private final File sharedFile;
 
         SharedFile(String file) throws IOException {
             this(new File(file));
@@ -175,7 +173,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
      * @param   file   the file
      */
     public SharedTmpFileInputStream(File file) throws IOException {
-        this(file, defaultBufferSize);
+        this(file, DEFAULT_BUFFER_SIZE);
     }
 
     /**
@@ -185,7 +183,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
      * @param   file   the file
      */
     public SharedTmpFileInputStream(String file) throws IOException {
-        this(file, defaultBufferSize);
+        this(file, DEFAULT_BUFFER_SIZE);
     }
 
     /**
@@ -196,8 +194,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
      * @param   size   the buffer size.
      * @exception IllegalArgumentException if size &lt;= 0.
      */
-    public SharedTmpFileInputStream(File file, int size)
-            throws IOException {
+    public SharedTmpFileInputStream(File file, int size) throws IOException {
         super(null); // XXX - will it NPE?
         if (size <= 0)
             throw new IllegalArgumentException("Buffer size <= 0");
@@ -212,8 +209,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
      * @param   size   the buffer size.
      * @exception IllegalArgumentException if size &lt;= 0.
      */
-    public SharedTmpFileInputStream(String file, int size)
-            throws IOException {
+    public SharedTmpFileInputStream(String file, int size) throws IOException {
         super(null); // XXX - will it NPE?
         if (size <= 0)
             throw new IllegalArgumentException("Buffer size <= 0");
@@ -395,7 +391,7 @@ public class SharedTmpFileInputStream extends BufferedInputStream implements Sha
         }
 
         long skipped = Math.min(avail, n);
-        pos += skipped;
+        pos += (int) skipped;
         return skipped;
     }
 

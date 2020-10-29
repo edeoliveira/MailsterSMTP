@@ -174,19 +174,9 @@
 					</snapshots>
 					<id>bintray-edeoliveira-maven</id>
 					<name>bintray</name>
-					<url>http://dl.bintray.com/edeoliveira/maven</url>
+					<url>https://dl.bintray.com/edeoliveira/maven</url>
 				</repository>
 			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>bintray-edeoliveira-maven</id>
-					<name>bintray-plugins</name>
-					<url>http://dl.bintray.com/edeoliveira/maven</url>
-				</pluginRepository>
-			</pluginRepositories>
 			<id>bintray</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
