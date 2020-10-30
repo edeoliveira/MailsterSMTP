@@ -1,4 +1,5 @@
-MailsterSMTP [ ![Download](https://api.bintray.com/packages/edeoliveira/maven/MailsterSMTP/images/download.svg?version=1.0.0) ](https://bintray.com/edeoliveira/maven/MailsterSMTP/1.0.0/link)
+MailsterSMTP [ ![Download](https://api.bintray.com/packages/edeoliveira/maven/MailsterSMTP/images/download.svg?version=1.0.0) ](https://bintray.com/edeoliveira/maven/MailsterSMTP/1.0.0/link) [![Total alerts](https://img.shields.io/lgtm/alerts/g/edeoliveira/MailsterSMTP.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/edeoliveira/MailsterSMTP/alerts/) 
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/edeoliveira/MailsterSMTP.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/edeoliveira/MailsterSMTP/context:java)
 ============
 
 A NIO SMTP server API written in Java
